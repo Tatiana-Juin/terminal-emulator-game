@@ -223,8 +223,19 @@ export default function Terminal() {
 
   return (
     <div>
+      {/* POUR AFFICHER L'HISTORIQUE  */}
+
+      {state.history.map((line,i) =>(
+        <div key={i}>
+          <p>$ {line.prompt} {line.command}</p>
+          {line.output  && 
+            <p> {line.output} </p>
+          }
+        </div>
+      ))}
       {/* pour affiche le texte  */}
       <input type="text" onKeyDown={handleKeyDown} />
+    
     </div>
 
   )
