@@ -194,6 +194,18 @@ function executeCommand(commandLine,state){
 
 export default function Terminal() {
   const [state, dispatch] = useReducer(terminalReducer, initialState);
+  const inputRef = useRef(null);
+  const bottomRef = useRef(null);
+  // pour garder le focus sur input
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [state.history]);
+
+  // // scroll automatique 
+   useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [state.history]);
+
   // fonction pour la saisie du texte 
   function handleKeyDown(e){
     if(e.key !== "Enter") return;
@@ -222,20 +234,48 @@ export default function Terminal() {
   }
 
   return (
-    <div>
+    <div onClick={() => inputRef.current?.focus()} 
+      style={{
+        background: "#1e1e1e",
+        color: "#e0e0e0",
+        fontFamily: "monospace",
+        fontSize: "14px",
+        padding: "1rem",
+        borderRadius: "8px",
+        height: "400px",
+        overflowY: "auto",
+        cursor: "text",
+      }}
+    >
       {/* POUR AFFICHER L'HISTORIQUE  */}
-
-      {state.history.map((line,i) =>(
-        <div key={i}>
-          <p>$ {line.prompt} {line.command}</p>
-          {line.output  && 
-            <p> {line.output} </p>
-          }
-        </div>
-      ))}
-      {/* pour affiche le texte  */}
-      <input type="text" onKeyDown={handleKeyDown} />
-    
+      
+          {state.history.map((line,i) =>(
+            <div key={i}>
+              <p>$ {line.prompt} {line.command}</p>
+              {line.output  && 
+                <p> {line.output} </p>
+              }
+            </div>
+          ))}
+          {/* pour affiche le texte  */}
+          <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
+            background: "transparent",
+            border: "none",
+            outline: "none",
+            color: "#e0e0e0",
+            fontFamily: "monospace",
+            fontSize: "14px",
+            flex: 1,
+          }}style={{
+            background: "transparent",
+            border: "none",
+            outline: "none",
+            color: "#e0e0e0",
+            fontFamily: "monospace",
+            fontSize: "14px",
+            flex: 1,
+          }} />
+      <div ref={bottomRef}></div>
     </div>
 
   )
