@@ -181,7 +181,7 @@ function executeCommand(commandLine,state){
           output:result.node.content
         }
       }
-
+      // en cas d'erreur 
       default:
         return{
           output:`commande introuvable : ${cmd}`,
@@ -191,16 +191,40 @@ function executeCommand(commandLine,state){
     }
   }
 
-console.log(executeCommand("pwd", { currentPath: ["home"] }));
-console.log(executeCommand("ls", { currentPath: ["home"] }));
-console.log(executeCommand("cd document2", { currentPath: ["home"] }));
-console.log(executeCommand("cat indice.txt", { currentPath: ["home", "document2"] }));
-console.log(executeCommand("cat inexistant.txt", { currentPath: ["home", "document2"] }));
-console.log(executeCommand("blabla", { currentPath: ["home"] }));
+
 export default function Terminal() {
+  const [state, dispatch] = useReducer(terminalReducer, initialState);
+  // fonction pour la saisie du texte 
+  function handleKeyDown(e){
+    if(e.key !== "Enter") return;
+    // recupere la valeur saisie 
+    const commandLine = e.target.value;
+    const result = executeCommand(commandLine,state);
+    
+    // le dispatch pour ajouter une ligne 
+    dispatch({
+      type:"ADD_LINE",
+      payload:{
+        prompt:"/" + state.currentPath.join("/"),
+        command: commandLine,
+        output: result.output,
+        isError:result.isError,
+      }
+    });
+    // POUR L'HISTORIQUE 
+    if(result.newPath){
+      dispatch({
+        type:"NAVIGATE",
+        payload:result.newPath,
+      })
+    }
+    e.target.value ="";
+  }
+
   return (
     <div>
-      terminal
+      {/* pour affiche le texte  */}
+      <input type="text" onKeyDown={handleKeyDown} />
     </div>
 
   )
