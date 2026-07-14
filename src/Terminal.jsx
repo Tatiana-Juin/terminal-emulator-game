@@ -1,5 +1,5 @@
 import { useReducer,useRef,useEffect } from "react"
-
+// chemin pour le premier niveau 
 const filesystem={
   type:"dir",
   children:{
@@ -97,6 +97,7 @@ function executeCommand(commandLine,state){
     case "":{
       return { output: "" };
     }
+    // le chemin actuelle 
     case "pwd": {
       return{
         output:"/" + state.currentPath.join("/")
@@ -127,9 +128,75 @@ function executeCommand(commandLine,state){
         output: children.length ? children.join(" ") : "(dossier vide)"
       };
     }
-  }
-}
 
+    case "cd":{
+      // recupere le dossier ou on est ou par defaut on est sur home 
+      const target = args[0] || "home";
+      // resout le chemin - recupere le chemin 
+      const result = resolvePath(filesystem,state.currentPath,target);
+      // LES ERREURS A GERER      
+      if(result.error){
+        return{
+          output: result.error , 
+          isError : true
+        };
+      }
+      if(result.node.type !== "dir"){
+        return{
+          output: "Erreur ca doit etre un dossier",
+          isError:true
+        };
+      }
+          // Ajout d'un  champs newPath pour pouvoir mettre a jour le type navigate du reducer
+          return {
+            output: "", 
+            newPath: result.path 
+          };
+        
+      }
+    
+      // pour cat
+      case "cat":{
+        const target = args[0];
+        if(!target){
+          return{
+            output:"Il a une erreur",
+            isError:true
+          }
+        }
+        const result = resolvePath(filesystem,state.currentPath,target);
+        if(result.error){
+          return{
+            output: result.error,
+            isError:true
+          }
+        }
+        if(result.node.type !=="file"){
+          return{
+            output:"erreur ca doit etre un fichier",
+            isError:true
+          }
+        }
+        return{
+          output:result.node.content
+        }
+      }
+
+      default:
+        return{
+          output:`commande introuvable : ${cmd}`,
+          isError:true
+        }
+     
+    }
+  }
+
+console.log(executeCommand("pwd", { currentPath: ["home"] }));
+console.log(executeCommand("ls", { currentPath: ["home"] }));
+console.log(executeCommand("cd document2", { currentPath: ["home"] }));
+console.log(executeCommand("cat indice.txt", { currentPath: ["home", "document2"] }));
+console.log(executeCommand("cat inexistant.txt", { currentPath: ["home", "document2"] }));
+console.log(executeCommand("blabla", { currentPath: ["home"] }));
 export default function Terminal() {
   return (
     <div>
