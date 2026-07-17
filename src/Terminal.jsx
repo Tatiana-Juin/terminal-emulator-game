@@ -255,7 +255,7 @@ export default function Terminal() {
       
           {state.history.map((line,i) =>(
             <div key={i}>
-              <p>user@debian $ {line.prompt} {line.command}</p>
+              <p>user@debian: $ {line.prompt} {line.command}</p>
               {line.output  && 
                 <p> {line.output} </p>
               }
@@ -263,14 +263,6 @@ export default function Terminal() {
           ))}
           {/* pour affiche le texte  */}
           <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
-            background: "transparent",
-            border: "none",
-            outline: "none",
-            color: "#e0e0e0",
-            fontFamily: "monospace",
-            fontSize: "14px",
-            flex: 1,
-          }}style={{
             background: "transparent",
             border: "none",
             outline: "none",
