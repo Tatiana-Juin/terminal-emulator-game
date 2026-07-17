@@ -6,23 +6,27 @@ const filesystem={
     home:{
       type:"dir",
       children:{
-        // home/document1
-        document1:{
+        // home/logs
+        logs:{
           type:"dir",
           children:{
-            "indicePossible.txt":{
+            "erreur.txt":{
               type:"file",
-              content:"Tu t'est tromper de dossier",
+              content:"03:42 — Intrusion détectée sur le réseau. Verrouillage automatique des accès activé.",
             }
           }
         },
-        // /home/document2
-       document2:{
+        // /home/system
+       system:{
           type:"dir",
           children:{
-            "indice.txt":{
+            "config.txt":{
               type:"file",
-              content:"bravo tu as trouver le code LINUX 15454"
+              content:"Réseau local : actif. Aucune anomalie détectée."
+            },
+            "deverrouillage.txt":{
+              type:"file",
+              content:"Code porte principale : 7291. Procédure d'urgence validée."
             }
           }
         }
