@@ -261,16 +261,21 @@ export default function Terminal() {
               }
             </div>
           ))}
-          {/* pour affiche le texte  */}
-          <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
-            background: "transparent",
-            border: "none",
-            outline: "none",
-            color: "#e0e0e0",
-            fontFamily: "monospace",
-            fontSize: "14px",
-            flex: 1,
-          }} />
+
+          <div style={{display:"flex"}}>
+              {/* pour voir ou on est  */}
+              <p>user@debian: $ { "/" + state.currentPath.join("/")} </p>
+              {/* pour affiche le texte  */}
+              <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
+                background: "transparent",
+                border: "none",
+                outline: "none",
+                color: "#e0e0e0",
+                fontFamily: "monospace",
+                fontSize: "14px",
+                flex: 1,
+              }} />
+          </div>
       <div ref={bottomRef}></div>
     </div>
 
