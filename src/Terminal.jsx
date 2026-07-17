@@ -255,7 +255,7 @@ export default function Terminal() {
       
           {state.history.map((line,i) =>(
             <div key={i}>
-              <p>$ {line.prompt} {line.command}</p>
+              <p>user@debian $ {line.prompt} {line.command}</p>
               {line.output  && 
                 <p> {line.output} </p>
               }
