@@ -257,7 +257,7 @@ export default function Terminal() {
             <div key={i}>
               <p>user@debian: $ {line.prompt} {line.command}</p>
               {line.output  && 
-                <p> {line.output} </p>
+                <p style={{ color: line.isError ? "red" : "white"}}> {line.output} </p>
               }
             </div>
           ))}
