@@ -1,4 +1,4 @@
-import { useReducer,useRef,useEffect } from "react"
+import { useReducer, useRef, useEffect, useState } from "react"
 // chemin pour le premier niveau 
 const filesystem={
   type:"dir",
@@ -70,6 +70,7 @@ function resolvePath(fs,currentPath,target){
 const initialState = {
   currentPath: ["home"],
   history:[],
+  isWon:false
 }
 
 function terminalReducer(state,action){
@@ -84,6 +85,11 @@ function terminalReducer(state,action){
         return{
           ...state,
           currentPath:action.payload,
+        }
+      case "WIN_LEVEL":
+        return{
+          ...state,
+          isWon:true
         }
       default :
         return state;
@@ -195,11 +201,16 @@ function executeCommand(commandLine,state){
     }
   }
 
+  function checkWin(commandLine) {
+    return commandLine.trim() === "7291";
+  }
+
 
 export default function Terminal() {
   const [state, dispatch] = useReducer(terminalReducer, initialState);
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
+  const [codeInput,setCodeInput] = useState("");
   // pour garder le focus sur input
   useEffect(() => {
     inputRef.current?.focus();
@@ -210,6 +221,7 @@ export default function Terminal() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [state.history]);
 
+  
   // fonction pour la saisie du texte 
   function handleKeyDown(e){
     if(e.key !== "Enter") return;
@@ -237,7 +249,29 @@ export default function Terminal() {
     e.target.value ="";
   }
 
+      // Fonction pour le code a saisir 
+    function handleCodeSubmit(e) {
+      if (e.key !== "Enter") return;
+      if (checkWin(codeInput)) {
+        dispatch({ type: "WIN_LEVEL" });
+      }
+    }
+
   return (
+    <>
+    <div>
+        <label>Code de déverrouillage : </label>
+        <input
+          type="text"
+          value={codeInput}
+          onChange={(e) => setCodeInput(e.target.value)}
+          onKeyDown={handleCodeSubmit}
+        />
+    </div>
+    {state.isWon && (
+      <p style={{color:"green"}}> Felicitation tu as réussi </p>
+    )}
+    
     <div onClick={() => inputRef.current?.focus()} 
       style={{
         background: "#1e1e1e",
@@ -278,6 +312,7 @@ export default function Terminal() {
           </div>
       <div ref={bottomRef}></div>
     </div>
-
+  </> 
   )
+  
 }
