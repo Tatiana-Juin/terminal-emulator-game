@@ -208,6 +208,7 @@ function executeCommand(commandLine,state){
   // Intro pour le texte
     const introText = "Tu es à ton travail devant ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu sens que tu n'a pas beaucoup d'oxygene. Tu regarde la porte et il a un code que tu ne connais pas .  " 
     const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
+
 export default function Terminal() {
   const [state, dispatch] = useReducer(terminalReducer, initialState);
   const inputRef = useRef(null);
@@ -270,6 +271,7 @@ export default function Terminal() {
     
   return (
     <>
+    {/* Pour afficher l'intro  */}
       {showIntro ?(
         <>
           <p> {introText} </p>
@@ -343,6 +345,7 @@ export default function Terminal() {
                     flex: 1,
                   }} />
               </div>
+              
           <div ref={bottomRef}></div>
         </div>
     </>
