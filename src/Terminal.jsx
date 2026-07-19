@@ -205,12 +205,19 @@ function executeCommand(commandLine,state){
     return commandLine.trim() === "7291";
   }
 
-
+  // Intro pour le texte
+    const introText = "Tu es à ton travail devant ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu sens que tu n'a pas beaucoup d'oxygene. Tu regarde la porte et il a un code que tu ne connais pas .  " 
+    const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
 export default function Terminal() {
   const [state, dispatch] = useReducer(terminalReducer, initialState);
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
   const [codeInput,setCodeInput] = useState("");
+  // pour afficher le texte d'intro 
+  const [showIntro,setShowIntro] = useState(true);
+  // POUR AFFICHER UN MESSAGE ERREUR 
+  const [codeError,setCodeError] = useState(false)
+
   // pour garder le focus sur input
   useEffect(() => {
     inputRef.current?.focus();
@@ -254,64 +261,92 @@ export default function Terminal() {
       if (e.key !== "Enter") return;
       if (checkWin(codeInput)) {
         dispatch({ type: "WIN_LEVEL" });
+        setCodeError(false);
+      }else{
+        setCodeError(true)
       }
     }
 
+    
   return (
     <>
-    <div>
-        <label>Code de déverrouillage : </label>
-        <input
-          type="text"
-          value={codeInput}
-          onChange={(e) => setCodeInput(e.target.value)}
-          onKeyDown={handleCodeSubmit}
-        />
-    </div>
-    {state.isWon && (
-      <p style={{color:"green"}}> Felicitation tu as réussi </p>
-    )}
-    
-    <div onClick={() => inputRef.current?.focus()} 
-      style={{
-        background: "#1e1e1e",
-        color: "#e0e0e0",
-        fontFamily: "monospace",
-        fontSize: "14px",
-        padding: "1rem",
-        borderRadius: "8px",
-        height: "400px",
-        overflowY: "auto",
-        cursor: "text",
-      }}
-    >
-      {/* POUR AFFICHER L'HISTORIQUE  */}
-      
-          {state.history.map((line,i) =>(
-            <div key={i}>
-              <p>user@debian: $ {line.prompt} {line.command}</p>
-              {line.output  && 
-                <p style={{ color: line.isError ? "red" : "white"}}> {line.output} </p>
-              }
-            </div>
-          ))}
-
-          <div style={{display:"flex"}}>
-              {/* pour voir ou on est  */}
-              <p>user@debian: $ { "/" + state.currentPath.join("/")} </p>
-              {/* pour affiche le texte  */}
-              <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
-                background: "transparent",
-                border: "none",
-                outline: "none",
-                color: "#e0e0e0",
-                fontFamily: "monospace",
-                fontSize: "14px",
-                flex: 1,
-              }} />
+      {showIntro ?(
+        <>
+          <p> {introText} </p>
+          <button onClick={()=>setShowIntro(false)}>Commencer</button>
+        </>
+      ) : (
+        <>
+        <div>
+          <div>
+            <>
+              <p>Objectifs</p>
+              <p> {objectiveIntro}</p>
+             </>
           </div>
-      <div ref={bottomRef}></div>
-    </div>
+         
+            <label>Code de déverrouillage : </label>
+            <input
+              type="text"
+              value={codeInput}
+              onChange={(e) => setCodeInput(e.target.value)}
+              onKeyDown={handleCodeSubmit}
+            />
+        </div>
+        {/* Pour savoir si tuas trouver e bon code */}
+        {state.isWon  ? (
+          <>
+          <p style={{color:"green"}}> Felicitation tu as réussi </p>
+          <button>Niveau suivant </button>
+          </>
+        ) : codeError ? (
+          <>
+            <p style={{ color:"red"}}> Ce n'est pas le bon code </p>
+          </>
+        ): null}
+        
+        <div onClick={() => inputRef.current?.focus()} 
+          style={{
+            background: "#1e1e1e",
+            color: "#e0e0e0",
+            fontFamily: "monospace",
+            fontSize: "14px",
+            padding: "1rem",
+            borderRadius: "8px",
+            height: "400px",
+            overflowY: "auto",
+            cursor: "text",
+          }}
+        >
+          {/* POUR AFFICHER L'HISTORIQUE  */}
+          
+              {state.history.map((line,i) =>(
+                <div key={i}>
+                  <p>user@debian: $ {line.prompt} {line.command}</p>
+                  {line.output  && 
+                    <p style={{ color: line.isError ? "red" : "white"}}> {line.output} </p>
+                  }
+                </div>
+              ))}
+
+              <div style={{display:"flex"}}>
+                  {/* pour voir ou on est  */}
+                  <p>user@debian: $ { "/" + state.currentPath.join("/")} </p>
+                  {/* pour affiche le texte  */}
+                  <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
+                    background: "transparent",
+                    border: "none",
+                    outline: "none",
+                    color: "#e0e0e0",
+                    fontFamily: "monospace",
+                    fontSize: "14px",
+                    flex: 1,
+                  }} />
+              </div>
+          <div ref={bottomRef}></div>
+        </div>
+    </>
+    )}
   </> 
   )
   
