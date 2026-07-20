@@ -200,7 +200,7 @@ function executeCommand(commandLine,state){
      
     }
   }
-
+  // Quand c'est bon 
   function checkWin(commandLine) {
     return commandLine.trim() === "7291";
   }
@@ -267,7 +267,7 @@ export default function Terminal() {
         setCodeError(true)
       }
     }
-
+    
     
   return (
     <>
@@ -279,75 +279,104 @@ export default function Terminal() {
         </>
       ) : (
         <>
-        <div>
-          <div>
-            <>
-              <p>Objectifs</p>
-              <p> {objectiveIntro}</p>
-             </>
-          </div>
-         
-            <label>Code de déverrouillage : </label>
-            <input
-              type="text"
-              value={codeInput}
-              onChange={(e) => setCodeInput(e.target.value)}
-              onKeyDown={handleCodeSubmit}
-            />
-        </div>
-        {/* Pour savoir si tuas trouver e bon code */}
-        {state.isWon  ? (
-          <>
-          <p style={{color:"green"}}> Felicitation tu as réussi </p>
-          <button>Niveau suivant </button>
-          </>
-        ) : codeError ? (
-          <>
-            <p style={{ color:"red"}}> Ce n'est pas le bon code </p>
-          </>
-        ): null}
-        
-        <div onClick={() => inputRef.current?.focus()} 
-          style={{
-            background: "#1e1e1e",
-            color: "#e0e0e0",
-            fontFamily: "monospace",
-            fontSize: "14px",
-            padding: "1rem",
-            borderRadius: "8px",
-            height: "400px",
-            overflowY: "auto",
-            cursor: "text",
-          }}
-        >
-          {/* POUR AFFICHER L'HISTORIQUE  */}
+        {/* POUR L'OBJECTIFS ET LE CODE DE DEVEROUILLAGE */}
+        <div style={{ 
+          display:"flex",
+          flexDirection:"row"
+        }}>
+          <div style={{
+              display:"flex",
+              flexDirection:"column",
+            }}>
+            {/* <div > */}
+              <>
+                <h2>Objectifs</h2>
+                <p> {objectiveIntro}</p>
+                
+              </>
+            {/* </div> */}
+            
           
-              {state.history.map((line,i) =>(
-                <div key={i}>
-                  <p>user@debian: $ {line.prompt} {line.command}</p>
-                  {line.output  && 
-                    <p style={{ color: line.isError ? "red" : "white"}}> {line.output} </p>
-                  }
-                </div>
-              ))}
+              <label>Code de déverrouillage : </label>
+              <input
+                type="text"
+                value={codeInput}
+                onChange={(e) => setCodeInput(e.target.value)}
+                onKeyDown={handleCodeSubmit}
+              />
+              {/* Pour savoir si tuas trouver e bon code */}
 
-              <div style={{display:"flex"}}>
-                  {/* pour voir ou on est  */}
-                  <p>user@debian: $ { "/" + state.currentPath.join("/")} </p>
-                  {/* pour affiche le texte  */}
-                  <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
-                    background: "transparent",
-                    border: "none",
-                    outline: "none",
-                    color: "#e0e0e0",
-                    fontFamily: "monospace",
-                    fontSize: "14px",
-                    flex: 1,
-                  }} />
-              </div>
-              
-          <div ref={bottomRef}></div>
+            {state.isWon  ? (
+              <>
+              <p style={{color:"green"}}> Felicitation tu as réussi </p>
+              <button>Niveau suivant </button>
+              </>
+            ) : codeError ? (
+              <>
+                <p style={{ color:"red"}}> Ce n'est pas le bon code </p>
+              </>
+            ): null}
+
+            <h1>Cours</h1>
+            <p>Pour pouvoir avancé dans l'histoire il faudra que tu connaisses les bases de linux . Ne t'inquite pas ce cours va t'aider pour avancer dans l'histoire</p>
+            <ul style={{ listStyle:"none"}}>
+              <li>pwd — affiche à quel endroit tu es actuellement dans l'arborescence. </li>
+              <li> ls — liste les fichiers et dossiers présents à l'endroit où tu es. </li>
+              <li>cd[dossier] — permet de te déplacer dans un dossier </li>
+              <li>cd .. — te fait remonter d'un niveau. </li>
+              <li>cat [fichier] — Affiche le contenus d'un fichier  </li>
+            </ul>
+          </div>
+          
+        <div style={{
+          display:"flex",
+          flexDirection:"column"
+        }}>
+          {/* pour le terminal  */}
+          <div onClick={() => inputRef.current?.focus()} 
+            style={{
+              background: "#1e1e1e",
+              color: "#e0e0e0",
+              fontFamily: "monospace",
+              fontSize: "14px",
+              padding: "1rem",
+              borderRadius: "8px",
+              height: "400px",
+              overflowY: "auto",
+              cursor: "text",
+            }}
+          >
+            {/* POUR AFFICHER L'HISTORIQUE  */}
+                {state.history.map((line,i) =>(
+                  <div key={i}>
+                    <p>user@debian: $ {line.prompt} {line.command}</p>
+                    {line.output  && 
+                      <p style={{ color: line.isError ? "red" : "white"}}> {line.output} </p>
+                    }
+                  </div>
+                ))}
+
+                <div style={{display:"flex"}}>
+                    {/* pour voir ou on est  */}
+                    <p>user@debian: $ { "/" + state.currentPath.join("/")} </p>
+
+                    {/* pour affiche le texte  */}
+                    <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
+                      background: "transparent",
+                      border: "none",
+                      outline: "none",
+                      color: "#e0e0e0",
+                      fontFamily: "monospace",
+                      fontSize: "14px",
+                      flex: 1,
+                    }} />
+                </div>
+                
+            <div ref={bottomRef}></div>
+          </div>
         </div>
+      </div>
+
     </>
     )}
   </> 
