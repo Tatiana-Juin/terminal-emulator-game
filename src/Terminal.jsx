@@ -279,31 +279,33 @@ export default function Terminal() {
         </>
       ) : (
         <>
-        {/* POUR L'OBJECTIFS ET LE CODE DE DEVEROUILLAGE */}
         <div style={{ 
           display:"flex",
-          flexDirection:"row"
+          flexDirection:"row",
+          width:"99vw",
+          height:"100vh",
+          
         }}>
+           {/* POUR L'OBJECTIFS ET LE CODE DE DEVEROUILLAGE */}
           <div style={{
               display:"flex",
               flexDirection:"column",
+              width:"50vw",
             }}>
-            {/* <div > */}
+            <div>
               <>
                 <h2>Objectifs</h2>
                 <p> {objectiveIntro}</p>
-                
-              </>
-            {/* </div> */}
-            
-          
-              <label>Code de déverrouillage : </label>
+                 <label>Code de déverrouillage : </label>
               <input
                 type="text"
                 value={codeInput}
                 onChange={(e) => setCodeInput(e.target.value)}
                 onKeyDown={handleCodeSubmit}
               />
+              </>
+            </div>
+            
               {/* Pour savoir si tuas trouver e bon code */}
 
             {state.isWon  ? (
@@ -319,20 +321,23 @@ export default function Terminal() {
 
             <h1>Cours</h1>
             <p>Pour pouvoir avancé dans l'histoire il faudra que tu connaisses les bases de linux . Ne t'inquite pas ce cours va t'aider pour avancer dans l'histoire</p>
-            <ul style={{ listStyle:"none"}}>
-              <li>pwd — affiche à quel endroit tu es actuellement dans l'arborescence. </li>
-              <li> ls — liste les fichiers et dossiers présents à l'endroit où tu es. </li>
-              <li>cd[dossier] — permet de te déplacer dans un dossier </li>
-              <li>cd .. — te fait remonter d'un niveau. </li>
-              <li>cat [fichier] — Affiche le contenus d'un fichier  </li>
+            <ul style={{ listStyle:"none",padding:0}}>
+              <li> - pwd — affiche à quel endroit tu es actuellement dans l'arborescence. </li>
+              <li> - ls — liste les fichiers et dossiers présents à l'endroit où tu es. </li>
+              <li> - cd[dossier] — permet de te déplacer dans un dossier </li>
+              <li> - cd .. — te fait remonter d'un niveau. </li>
+              <li> - cat [fichier] — Affiche le contenus d'un fichier  </li>
             </ul>
           </div>
-          
+
+         {/* POUR LE TERMINAL */}
         <div style={{
           display:"flex",
-          flexDirection:"column"
+          flexDirection:"column",
+          width:"50vw",
+          
         }}>
-          {/* pour le terminal  */}
+         
           <div onClick={() => inputRef.current?.focus()} 
             style={{
               background: "#1e1e1e",
@@ -344,6 +349,7 @@ export default function Terminal() {
               height: "400px",
               overflowY: "auto",
               cursor: "text",
+              height:"100vh"
             }}
           >
             {/* POUR AFFICHER L'HISTORIQUE  */}
