@@ -283,7 +283,7 @@ export default function Terminal() {
           display:"flex",
           flexDirection:"row",
           width:"99vw",
-          height:"100vh",
+          height:"99vh",
           
         }}>
            {/* POUR L'OBJECTIFS ET LE CODE DE DEVEROUILLAGE */}
@@ -349,7 +349,7 @@ export default function Terminal() {
               height: "400px",
               overflowY: "auto",
               cursor: "text",
-              height:"100vh"
+              height:"99vh"
             }}
           >
             {/* POUR AFFICHER L'HISTORIQUE  */}
