@@ -209,6 +209,20 @@ function executeCommand(commandLine,state){
     const introText = "Tu es à ton travail devant ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu sens que tu n'a pas beaucoup d'oxygene. Tu regarde la porte et il a un code que tu ne connais pas .  " 
     const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
 
+    // cette fonction fait 2 chose elle retire le fichier de son emplacement et l'ajoute a son nouvelle emplacement 
+function updateAtPath(obj,path,newValue){
+  if(path.length === 0){
+    return newValue;
+  }
+
+  const [first,...rest] = path;
+  return{
+    ...obj,
+    // On utilise les crochet pour que cela devienne le nom de la cle donc ca sera first et on aura pas besoin de l'ecrire 
+    [first]: updateAtPath(obj[first],rest,newValue)
+  };
+}
+
 export default function Terminal() {
   const [state, dispatch] = useReducer(terminalReducer, initialState);
   const inputRef = useRef(null);
