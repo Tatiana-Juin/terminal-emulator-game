@@ -1,6 +1,6 @@
 import { useReducer, useRef, useEffect, useState } from "react"
 // chemin pour le premier niveau 
-const filesystem={
+const filesystemInitial={
   type:"dir",
   children:{
     home:{
@@ -99,7 +99,7 @@ function terminalReducer(state,action){
 }
 // console.log(resolvePath(filesystem, ["home"], "document2"));
 
-function executeCommand(commandLine,state){
+function executeCommand(commandLine,state,filesystem){
   // split(/\s+/) pour eviter qu'il est des element vide dans le tableau 
   const [cmd,...args] = commandLine.trim().split(/\s+/);
   switch(cmd){
@@ -232,7 +232,8 @@ export default function Terminal() {
   const [showIntro,setShowIntro] = useState(true);
   // POUR AFFICHER UN MESSAGE ERREUR 
   const [codeError,setCodeError] = useState(false)
-
+  // pour le chemin 
+  const [filesystem,setFilesystem] = useState(filesystemInitial);
   // pour garder le focus sur input
   useEffect(() => {
     inputRef.current?.focus();
@@ -249,7 +250,7 @@ export default function Terminal() {
     if(e.key !== "Enter") return;
     // recupere la valeur saisie 
     const commandLine = e.target.value;
-    const result = executeCommand(commandLine,state);
+    const result = executeCommand(commandLine,state,filesystem);
     
     // le dispatch pour ajouter une ligne 
     dispatch({
