@@ -1,5 +1,5 @@
 import { useReducer, useRef, useEffect, useState } from "react"
-// chemin pour le premier niveau 
+// chemin por le premier niveau mais surout modifiable pour les prochain niveau grace au useState 
 const filesystemInitial={
   type:"dir",
   children:{
