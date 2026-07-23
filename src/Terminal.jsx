@@ -35,6 +35,22 @@ const filesystemInitial={
     }
   }
 }
+// Intro pour le texte
+  const introText = "Tu es à ton travail devant ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu sens que tu n'a pas beaucoup d'oxygene. Tu regarde la porte et il a un code que tu ne connais pas .  " 
+  const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
+
+    // tableau d'objet pour les niveaux 
+    const levels=[
+      {
+        id:1,
+        filesystem:filesystemInitial,
+        introText:introText,
+        objectiveIntro:objectiveIntro,
+        checkWin:(commandLine)=> commandLine.trim()==="7291"
+
+      }
+    ]
+
 
 // FONCTION POUR LES CHEMIN 
 function resolvePath(fs,currentPath,target){
@@ -62,7 +78,6 @@ function resolvePath(fs,currentPath,target){
      node = node.children[segment];
   }
   return { node, path: pathSegments };
-
 
 }
 
@@ -205,9 +220,7 @@ function executeCommand(commandLine,state,filesystem){
     return commandLine.trim() === "7291";
   }
 
-  // Intro pour le texte
-    const introText = "Tu es à ton travail devant ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu sens que tu n'a pas beaucoup d'oxygene. Tu regarde la porte et il a un code que tu ne connais pas .  " 
-    const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
+  
 
     // cette fonction fait 2 chose elle retire le fichier de son emplacement et l'ajoute a son nouvelle emplacement 
 function updateAtPath(obj,path,newValue){
@@ -232,8 +245,14 @@ export default function Terminal() {
   const [showIntro,setShowIntro] = useState(true);
   // POUR AFFICHER UN MESSAGE ERREUR 
   const [codeError,setCodeError] = useState(false)
+  
+  // useState pour savoir a quel niveau on est c'est la position dans le tableau 
+  const [currentLevelIndex,setCurrentLevelIndex] = useState(0)
+  const currentLevel = levels[currentLevelIndex];
   // pour le chemin 
-  const [filesystem,setFilesystem] = useState(filesystemInitial);
+  const [filesystem,setFilesystem] = useState(currentLevel.filesystem);
+  
+
   // pour garder le focus sur input
   useEffect(() => {
     inputRef.current?.focus();
@@ -275,7 +294,7 @@ export default function Terminal() {
       // Fonction pour le code a saisir 
     function handleCodeSubmit(e) {
       if (e.key !== "Enter") return;
-      if (checkWin(codeInput)) {
+      if (currentLevel.checkWin(codeInput)) {
         dispatch({ type: "WIN_LEVEL" });
         setCodeError(false);
       }else{
@@ -289,7 +308,7 @@ export default function Terminal() {
     {/* Pour afficher l'intro  */}
       {showIntro ?(
         <>
-          <p> {introText} </p>
+          <p> {currentLevel.introText} </p>
           <button onClick={()=>setShowIntro(false)}>Commencer</button>
         </>
       ) : (
@@ -310,7 +329,7 @@ export default function Terminal() {
             <div>
               <>
                 <h2>Objectifs</h2>
-                <p> {objectiveIntro}</p>
+                <p> {currentLevel.objectiveIntro}</p>
                  <label>Code de déverrouillage : </label>
               <input
                 type="text"
