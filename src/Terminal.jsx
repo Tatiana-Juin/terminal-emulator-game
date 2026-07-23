@@ -39,6 +39,40 @@ const filesystemInitial={
   const introText = "Tu es à ton travail devant ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu sens que tu n'a pas beaucoup d'oxygene. Tu regarde la porte et il a un code que tu ne connais pas .  " 
   const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
 
+  // POUR LE NIVEAU 2 
+  const filesystemLevel2={
+    type:"dir",
+    children:{
+      home:{
+        type:"dir",
+        children:{
+          temp:{
+            type:"dir",
+            children:{
+              "code_alarme.txt":{
+                type:"file",
+                content:"Fichier de désactivation d'alarme. Système : non reconnu à cet emplacement. Déplacer vers /home/securite/ pour activation."
+              },
+              "dechet.txt":{
+                type:"file",
+                content:"Tu es dans le bon dossier mais c'est pas le bon fichier"
+              }
+            }
+          },
+          securite:{
+            type:"dir",
+            children:{
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  const level2Intro="La porte s'ouvre et tu te sens mieux mais d'ou d'un coup tu entent une alrme . Tu as peur car tu sais que ca va prévenir le hacker . Tu essaie de l'arreter. Tu regarder sur l'ordinateur et tu ne trouve pas le fichier dans le dossier securité il est vide .";
+
+  const level2Objective="Tu dois trouver le fichier et le deplacer dans le dossier securite "
     // tableau d'objet pour les niveaux 
     const levels=[
       {
@@ -46,8 +80,15 @@ const filesystemInitial={
         filesystem:filesystemInitial,
         introText:introText,
         objectiveIntro:objectiveIntro,
-        checkWin:(commandLine)=> commandLine.trim()==="7291"
+        checkWin:(commandLine)=> commandLine.trim()==="7291",
+        useCodeInput:true
 
+      },{
+        id:2,
+        filesystem:filesystemLevel2,
+        introText:level2Intro,
+        objectiveIntro:level2Objective,
+        useCodeInput:false
       }
     ]
 
@@ -330,6 +371,9 @@ export default function Terminal() {
               <>
                 <h2>Objectifs</h2>
                 <p> {currentLevel.objectiveIntro}</p>
+
+                {currentLevel.useCodeInput && (
+                  <>
                  <label>Code de déverrouillage : </label>
               <input
                 type="text"
@@ -337,6 +381,10 @@ export default function Terminal() {
                 onChange={(e) => setCodeInput(e.target.value)}
                 onKeyDown={handleCodeSubmit}
               />
+              </>
+              )}
+
+
               </>
             </div>
             
