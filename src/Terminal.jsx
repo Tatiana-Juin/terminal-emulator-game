@@ -253,10 +253,61 @@ function executeCommand(commandLine,state,filesystem){
         //  vérifie que l'utilisateur a bien tapé une source ET une destination après mv
         if(!targetSource || !targetDestination){
           return{
-            output:"Il a une erreur",
+            output:"usage : mv <source> <destination>",
             isError:true
           };
         }
+        // pour récuperer le fichier voir s'il existe 
+        const resultSource = resolvePath(filesystem,state.currentPath,targetSource);
+        if(resultSource.error){
+          return{
+            output: resultSource.error,
+            isError:true
+          }
+        }
+        if(resultSource.node.type !=="file"){
+          return{
+            output:"erreur ca doit etre un fichier",
+            isError:true
+          }
+        }
+        // separer le dossier et le nom du fichier pour la destination 
+        const destSegments = targetDestination.split("/").filter(Boolean);
+        const destFileName = destSegments[destSegments.length-1];
+        const destFolderPath = destSegments.slice(0,-1).join("/") || ".";
+
+        const resultDestFolder= resolvePath(filesystem,state.currentPath,destFolderPath);
+       
+        if(resultDestFolder.error){
+          return{
+            output: resultDestFolder.error,
+            isError:true
+          }
+        }
+         if(resultDestFolder.node.type !=="dir"){
+          return{
+            output:"erreur ca doit etre un dossier",
+            isError:true
+          }
+        }
+
+        // par contre il faut supprimer la cles de l'ancien fichier quand il etait encore danns le dossier temps 
+        const filesystemAfterRemove = removeAtPath(filesystem,resultSource.path);
+        /*
+          resultSource.path => chemin complet du fichier source
+          resultSource.node => le fichier lui meme
+          resultDestFolder.path => chemin complet du dossier destination 
+          destFileName => le nom a donnée au fichier une fois deplacer
+
+          Ajout du fichier a la destination
+        */
+        const filesystemAfterAdd = updateAtPath(filesystemAfterRemove,[...resultDestFolder.path,destFileName], resultSource.node);
+
+        return{
+          output:"",
+          newFilesystem:filesystemAfterAdd
+        }
+
       }
       // en cas d'erreur 
       default:
@@ -286,6 +337,22 @@ function updateAtPath(obj,path,newValue){
     // On utilise les crochet pour que cela devienne le nom de la cle donc ca sera first et on aura pas besoin de l'ecrire 
     [first]: updateAtPath(obj[first],rest,newValue)
   };
+}
+
+function removeAtPath(obj,path){
+  // si la cles existe on se place au dessus et on la supprime 
+  if(path.length ===1){
+    const copy = {...obj};
+    delete copy[path[0]];
+    return copy
+  }
+  // first premier element /home 
+  // rest => ["temps","code_alarme.txt"]=> tout le reste du tableau 
+  const [first, ...rest] = path;
+  return{
+    ...obj,
+    [first] : removeAtPath(obj[first],rest)
+  }
 }
 
 export default function Terminal() {
