@@ -247,6 +247,17 @@ function executeCommand(commandLine,state,filesystem){
           output:result.node.content
         }
       }
+      case "mv":{
+        const targetSource = args[0];
+        const targetDestination = args[1];
+        //  vérifie que l'utilisateur a bien tapé une source ET une destination après mv
+        if(!targetSource || !targetDestination){
+          return{
+            output:"Il a une erreur",
+            isError:true
+          };
+        }
+      }
       // en cas d'erreur 
       default:
         return{
