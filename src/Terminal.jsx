@@ -95,19 +95,22 @@ const filesystemInitial={
 
 // FONCTION POUR LES CHEMIN 
 function resolvePath(fs,currentPath,target){
-  let pathSegments;
+  // On decide d'ou on part racine si absolu , currentPath si absolu 
+  let pathSegments = target.startsWith("/") ? [] : [...currentPath];
+  // decoupe le reste du chemin en segment individuels 
+  const targetSegments = target.split("/").filter(Boolean);
 
-  if(target.startsWith("/")){
-    pathSegments = target.split("/").filter(Boolean);
-  }
-  else if(target === ".."){
-    pathSegments = currentPath.slice(0,-1);
-  }
-  else if(target ==="."){
-    pathSegments = [...currentPath];
-  }else{
-    pathSegments = [...currentPath,...target.split("/").filter(Boolean)];
-  }
+ for(const segment of targetSegments){
+    if(segment ===".."){
+      // on enelve un 
+      pathSegments=pathSegments.slice(0,-1)
+    }
+    else if(segment==="."){
+      // on ignore
+    }else{
+      pathSegments=[...pathSegments,segment]
+    }
+ }
 
   let node = fs;
 
@@ -274,7 +277,7 @@ function executeCommand(commandLine,state,filesystem){
         // separer le dossier et le nom du fichier pour la destination 
         const destSegments = targetDestination.split("/").filter(Boolean);
         const destFileName = destSegments[destSegments.length-1];
-        const destFolderPath = destSegments.slice(0,-1).join("/") || ".";
+      const destFolderPath = (targetDestination.startsWith("/") ? "/" : "") + destSegments.slice(0, -1).join("/");
 
         const resultDestFolder= resolvePath(filesystem,state.currentPath,destFolderPath);
        
@@ -292,7 +295,7 @@ function executeCommand(commandLine,state,filesystem){
         }
 
         // par contre il faut supprimer la cles de l'ancien fichier quand il etait encore danns le dossier temps 
-        const filesystemAfterRemove = removeAtPath(filesystem,resultSource.path);
+        const filesystemAfterRemove = removeAtPath(filesystem,toChildrenPath(resultSource.path));
         /*
           resultSource.path => chemin complet du fichier source
           resultSource.node => le fichier lui meme
@@ -301,7 +304,11 @@ function executeCommand(commandLine,state,filesystem){
 
           Ajout du fichier a la destination
         */
-        const filesystemAfterAdd = updateAtPath(filesystemAfterRemove,[...resultDestFolder.path,destFileName], resultSource.node);
+        const filesystemAfterAdd = updateAtPath(
+          filesystemAfterRemove,
+          toChildrenPath([...resultDestFolder.path,destFileName]),
+          resultSource.node
+        );
 
         return{
           output:"",
@@ -355,6 +362,16 @@ function removeAtPath(obj,path){
   }
 }
 
+// fonction qui  permet d'ajouter children entre chaque segment(dossier fichier) comme dans l'arborescence du premier niveau c'est pour cela qu'on a un bug car on a directement acces a l'objet alors que on a besoin de children 
+function toChildrenPath(pathSegments){
+  const result= [];
+  for(const segment of pathSegments){
+    result.push("children");
+    result.push(segment)
+  }
+  return result;
+}
+
 export default function Terminal() {
   const [state, dispatch] = useReducer(terminalReducer, initialState);
   const inputRef = useRef(null);
@@ -366,7 +383,7 @@ export default function Terminal() {
   const [codeError,setCodeError] = useState(false)
   
   // useState pour savoir a quel niveau on est c'est la position dans le tableau 
-  const [currentLevelIndex,setCurrentLevelIndex] = useState(0)
+  const [currentLevelIndex,setCurrentLevelIndex] = useState(1)
   const currentLevel = levels[currentLevelIndex];
   // pour le chemin 
   const [filesystem,setFilesystem] = useState(currentLevel.filesystem);
@@ -406,6 +423,9 @@ export default function Terminal() {
         type:"NAVIGATE",
         payload:result.newPath,
       })
+    }
+    if(result.newFilesystem){
+      setFilesystem(result.newFilesystem);
     }
     e.target.value ="";
   }
