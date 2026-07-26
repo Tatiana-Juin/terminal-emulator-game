@@ -88,7 +88,8 @@ const filesystemInitial={
         filesystem:filesystemLevel2,
         introText:level2Intro,
         objectiveIntro:level2Objective,
-        useCodeInput:false
+        useCodeInput:false,
+        checkWin: (filesystem) => filesystem.children.home.children.securite?.children["code_alarme.txt"] !== undefined
       }
     ]
 
@@ -274,45 +275,59 @@ function executeCommand(commandLine,state,filesystem){
             isError:true
           }
         }
-        // separer le dossier et le nom du fichier pour la destination 
+        // ==========================================
+        // lOGIQUE DE VERIFICATION
+        // ==========================================
+
+        // 3a. Récupérer le nom exact du fichier d'origine
+        // Ex: si targetSource est "temp/code_alarme.txt", sourceFileName devient "code_alarme.txt"
+        const sourceSegments = targetSource.split("/").filter(Boolean);
+        const sourceFileName = sourceSegments[sourceSegments.length - 1];
+
+        // 3b. Récupérer le nom de destination proposé par le joueur
+        // Ex: si targetDestination est "../securite", destFileName devient "securite"
         const destSegments = targetDestination.split("/").filter(Boolean);
-        const destFileName = destSegments[destSegments.length-1];
-      const destFolderPath = (targetDestination.startsWith("/") ? "/" : "") + destSegments.slice(0, -1).join("/");
+        const destFileName = destSegments[destSegments.length - 1];
 
-        const resultDestFolder= resolvePath(filesystem,state.currentPath,destFolderPath);
-       
-        if(resultDestFolder.error){
-          return{
+        // 3c. L'interdiction stricte : on compare les deux noms
+        if (destFileName !== sourceFileName) {
+          return {
+            output: `Erreur : Vous devez spécifier le nom complet du fichier à l'arrivée (ex: .../${sourceFileName})`,
+            isError: true
+          };
+        }
+        // ==========================================
+
+        // 4. Isoler le chemin du dossier de destination en enlevant le nom du fichier à la fin
+        // Ex: "../securite/code_alarme.txt" devient "../securite"
+        const destFolderPath = (targetDestination.startsWith("/") ? "/" : "") + destSegments.slice(0, -1).join("/");
+        
+        // 5. Vérifier que ce dossier de destination existe bien
+        const resultDestFolder = resolvePath(filesystem, state.currentPath, destFolderPath);
+        if (resultDestFolder.error) {
+          return {
             output: resultDestFolder.error,
-            isError:true
+            isError: true
           }
         }
-         if(resultDestFolder.node.type !=="dir"){
-          return{
-            output:"erreur ca doit etre un dossier",
-            isError:true
+        if (resultDestFolder.node.type !== "dir") {
+          return {
+            output: "erreur: la destination doit être un dossier",
+            isError: true
           }
         }
 
-        // par contre il faut supprimer la cles de l'ancien fichier quand il etait encore danns le dossier temps 
-        const filesystemAfterRemove = removeAtPath(filesystem,toChildrenPath(resultSource.path));
-        /*
-          resultSource.path => chemin complet du fichier source
-          resultSource.node => le fichier lui meme
-          resultDestFolder.path => chemin complet du dossier destination 
-          destFileName => le nom a donnée au fichier une fois deplacer
-
-          Ajout du fichier a la destination
-        */
+        // 6. Procéder au déplacement (suppression puis ajout)
+        const filesystemAfterRemove = removeAtPath(filesystem, toChildrenPath(resultSource.path));
         const filesystemAfterAdd = updateAtPath(
           filesystemAfterRemove,
-          toChildrenPath([...resultDestFolder.path,destFileName]),
+          toChildrenPath([...resultDestFolder.path, destFileName]),
           resultSource.node
         );
 
-        return{
-          output:"",
-          newFilesystem:filesystemAfterAdd
+        return {
+          output: "",
+          newFilesystem: filesystemAfterAdd
         }
 
       }
