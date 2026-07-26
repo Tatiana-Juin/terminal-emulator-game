@@ -447,9 +447,10 @@ export default function Terminal() {
     // On remplace donc l'ancienne arborescence par la nouvelle.
     if(result.newFilesystem){
       setFilesystem(result.newFilesystem);
+    }
     // on vide le champs
     e.target.value ="";
-  }
+  
 }
 
       // Fonction pour le code a saisir 
