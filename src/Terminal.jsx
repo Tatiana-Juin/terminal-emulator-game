@@ -420,9 +420,12 @@ export default function Terminal() {
     if(e.key !== "Enter") return;
     // recupere la valeur saisie 
     const commandLine = e.target.value;
+    // 3. On envoie cette phrase à ton "cerveau" (executeCommand). 
+    // Il va nous renvoyer un objet "result" qui peut contenir plusieurs choses : 
+    // du texte (output), un nouveau chemin (newPath), ou une nouvelle arborescence (newFilesystem)
     const result = executeCommand(commandLine,state,filesystem);
     
-    // le dispatch pour ajouter une ligne 
+    // le dispatch pour ajouter une ligneà l'historique
     dispatch({
       type:"ADD_LINE",
       payload:{
@@ -432,18 +435,22 @@ export default function Terminal() {
         isError:result.isError,
       }
     });
-    // POUR L'HISTORIQUE 
+    // 5. Si la commande était un "cd" valide, executeCommand nous a renvoyé un "newPath".
+    // On met donc à jour le chemin actuel dans le state.
     if(result.newPath){
       dispatch({
         type:"NAVIGATE",
         payload:result.newPath,
       })
     }
+    // 6. Si la commande était un "mv" valide, executeCommand nous a renvoyé un "newFilesystem".
+    // On remplace donc l'ancienne arborescence par la nouvelle.
     if(result.newFilesystem){
       setFilesystem(result.newFilesystem);
-    }
+    // on vide le champs
     e.target.value ="";
   }
+}
 
       // Fonction pour le code a saisir 
     function handleCodeSubmit(e) {
@@ -584,3 +591,4 @@ export default function Terminal() {
   )
   
 }
+
