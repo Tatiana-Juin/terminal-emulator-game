@@ -448,6 +448,15 @@ export default function Terminal() {
     if(result.newFilesystem){
       setFilesystem(result.newFilesystem);
     }
+
+    // POUR VALIDER LA VICTOIRE QUAND TU FAIS mv
+    if(!currentLevel.useCodeInput && result.newFilesystem){
+        if(currentLevel.checkWin(result.newFilesystem)){
+          dispatch({
+            type:"WIN_LEVEL"
+          })
+      }
+    }
     // on vide le champs
     e.target.value ="";
   
