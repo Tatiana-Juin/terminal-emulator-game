@@ -151,6 +151,8 @@ function terminalReducer(state,action){
           ...state,
           isWon:true
         }
+      case "RESET":
+        return initialState
       default :
         return state;
 
@@ -398,7 +400,7 @@ export default function Terminal() {
   const [codeError,setCodeError] = useState(false)
   
   // useState pour savoir a quel niveau on est c'est la position dans le tableau 
-  const [currentLevelIndex,setCurrentLevelIndex] = useState(1)
+  const [currentLevelIndex,setCurrentLevelIndex] = useState(0)
   const currentLevel = levels[currentLevelIndex];
   // pour le chemin 
   const [filesystem,setFilesystem] = useState(currentLevel.filesystem);
@@ -472,6 +474,18 @@ export default function Terminal() {
         setCodeError(true)
       }
     }
+
+    // Fonction pour passer au niveau suivant 
+    function handleNextLevel(){
+      const nouvelIndex = currentLevelIndex +1;
+      setCurrentLevelIndex(nouvelIndex)
+      setFilesystem(levels[nouvelIndex].filesystem);
+      
+      dispatch({
+        type:"RESET"
+      })
+      setShowIntro(true);
+    }
     
     
   return (
@@ -523,7 +537,7 @@ export default function Terminal() {
             {state.isWon  ? (
               <>
               <p style={{color:"green"}}> Felicitation tu as réussi </p>
-              <button>Niveau suivant </button>
+              <button onClick={handleNextLevel}>Niveau suivant </button>
               </>
             ) : codeError ? (
               <>
