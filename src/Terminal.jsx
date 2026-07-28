@@ -39,6 +39,15 @@ const filesystemInitial={
   const introText = "Tu es à ton travail devant ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu sens que tu n'a pas beaucoup d'oxygene. Tu regarde la porte et il a un code que tu ne connais pas .  " 
   const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
 
+  // POUR LES COURS 
+  const course1 = [
+    { cmd:"pwd", description:"affiche à quel endroit tu es actuellement dans l'arborescence. ",example:"pwd"},
+    {cmd:"ls", description:"liste les fichiers et dossiers présents à l'endroit où tu es.",example:"ls"},
+    {cmd:"cd[dossier]",description:"Permet de te déplacer dans un dossier",example:"cd dossier"},
+    {cmd:"cd ..",description:"Te fait remonter d'un niveau si tu as par exemple home/log/system est que tu es dans system et que tu veux aller dans log tu vas faire",example:"cd .."},
+    {cmd:"cat",description:"Affiche le contenu d'un fichier",example:"cat fichier.txt"}
+  ]
+
   // POUR LE NIVEAU 2 
   const filesystemLevel2={
     type:"dir",
@@ -73,6 +82,12 @@ const filesystemInitial={
   const level2Intro="La porte s'ouvre et tu te sens mieux mais d'ou d'un coup tu entent une alrme . Tu as peur car tu sais que ca va prévenir le hacker . Tu essaie de l'arreter. Tu regarder sur l'ordinateur et tu ne trouve pas le fichier dans le dossier securité il est vide .";
 
   const level2Objective="Tu dois trouver le fichier et le deplacer dans le dossier securite "
+
+
+  const course2=[
+    ...course1,
+    {cmd:"mv",description:"deplace un fichier d'un dossier a un autre. Par example tu as home/log/system et tu va deplacer le fichier fichier.txt de system au dossier log",example:"mv fichier.txt ../system/fichier.txt"}
+  ]
     // tableau d'objet pour les niveaux 
     const levels=[
       {
@@ -81,7 +96,8 @@ const filesystemInitial={
         introText:introText,
         objectiveIntro:objectiveIntro,
         checkWin:(commandLine)=> commandLine.trim()==="7291",
-        useCodeInput:true
+        useCodeInput:true,
+        course:course1
 
       },{
         id:2,
@@ -89,7 +105,9 @@ const filesystemInitial={
         introText:level2Intro,
         objectiveIntro:level2Objective,
         useCodeInput:false,
-        checkWin: (filesystem) => filesystem.children.home.children.securite?.children["code_alarme.txt"] !== undefined
+        checkWin: (filesystem) => filesystem.children.home.children.securite?.children["code_alarme.txt"] !== undefined,
+        course:course2,
+        
       }
     ]
 
@@ -545,15 +563,16 @@ export default function Terminal() {
               </>
             ): null}
 
-            <h1>Cours</h1>
+            <h1 style={{marginBottom:"5px"}}>Cours</h1>
             <p>Pour pouvoir avancé dans l'histoire il faudra que tu connaisses les bases de linux . Ne t'inquite pas ce cours va t'aider pour avancer dans l'histoire</p>
-            <ul style={{ listStyle:"none",padding:0}}>
-              <li> - pwd — affiche à quel endroit tu es actuellement dans l'arborescence. </li>
-              <li> - ls — liste les fichiers et dossiers présents à l'endroit où tu es. </li>
-              <li> - cd[dossier] — permet de te déplacer dans un dossier </li>
-              <li> - cd .. — te fait remonter d'un niveau. </li>
-              <li> - cat [fichier] — Affiche le contenus d'un fichier  </li>
-            </ul>
+            {currentLevel.course.map((cour)=>(
+              <div key={cour.cmd}>
+                <h2> {cour.cmd} </h2>
+                <p>{cour.description}</p>
+                <code> {cour.example} </code>
+              </div>
+            ))}
+            
           </div>
 
          {/* POUR LE TERMINAL */}
