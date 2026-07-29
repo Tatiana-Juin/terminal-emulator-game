@@ -1,119 +1,9 @@
 import { useReducer, useRef, useEffect, useState } from "react"
-import { updateAtPath,removeAtPath,toChildrenPath } from "./engine/pathUtils"
-import { resolvePath } from "./engine/resolvePath"
-import { initialState,terminalReducer } from "./engine/terminalReducer"
-import { executeCommand } from './engine/executeCommand';
-// chemin por le premier niveau mais surout modifiable pour les prochain niveau grace au useState 
-const filesystemInitial={
-  type:"dir",
-  children:{
-    home:{
-      type:"dir",
-      children:{
-        // home/logs
-        logs:{
-          type:"dir",
-          children:{
-            "erreur.txt":{
-              type:"file",
-              content:"03:42 — Intrusion détectée sur le réseau. Verrouillage automatique des accès activé.",
-            }
-          }
-        },
-        // /home/system
-       system:{
-          type:"dir",
-          children:{
-            "config.txt":{
-              type:"file",
-              content:"Réseau local : actif. Aucune anomalie détectée."
-            },
-            "deverrouillage.txt":{
-              type:"file",
-              content:"Code porte principale : 7291. Procédure d'urgence validée."
-            }
-          }
-        }
-      
-      }
-    }
-  }
-}
-// Intro pour le texte
-  const introText = "Tu es à ton travail devant ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu sens que tu n'a pas beaucoup d'oxygene. Tu regarde la porte et il a un code que tu ne connais pas .  " 
-  const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
-
-  // POUR LES COURS 
-  const course1 = [
-    { cmd:"pwd", description:"affiche à quel endroit tu es actuellement dans l'arborescence. ",example:"pwd"},
-    {cmd:"ls", description:"liste les fichiers et dossiers présents à l'endroit où tu es.",example:"ls"},
-    {cmd:"cd[dossier]",description:"Permet de te déplacer dans un dossier",example:"cd dossier"},
-    {cmd:"cd ..",description:"Te fait remonter d'un niveau si tu as par exemple home/log/system est que tu es dans system et que tu veux aller dans log tu vas faire",example:"cd .."},
-    {cmd:"cat",description:"Affiche le contenu d'un fichier",example:"cat fichier.txt"}
-  ]
-
-  // POUR LE NIVEAU 2 
-  const filesystemLevel2={
-    type:"dir",
-    children:{
-      home:{
-        type:"dir",
-        children:{
-          temp:{
-            type:"dir",
-            children:{
-              "code_alarme.txt":{
-                type:"file",
-                content:"Fichier de désactivation d'alarme. Système : non reconnu à cet emplacement. Déplacer vers /home/securite/ pour activation."
-              },
-              "dechet.txt":{
-                type:"file",
-                content:"Tu es dans le bon dossier mais c'est pas le bon fichier"
-              }
-            }
-          },
-          securite:{
-            type:"dir",
-            children:{
-
-            }
-          }
-        }
-      }
-    }
-  }
-
-  const level2Intro="La porte s'ouvre et tu te sens mieux mais d'ou d'un coup tu entent une alrme . Tu as peur car tu sais que ca va prévenir le hacker . Tu essaie de l'arreter. Tu regarder sur l'ordinateur et tu ne trouve pas le fichier dans le dossier securité il est vide .";
-
-  const level2Objective="Tu dois trouver le fichier et le deplacer dans le dossier securite "
-
-
-  const course2=[
-    ...course1,
-    {cmd:"mv",description:"deplace un fichier d'un dossier a un autre. Par example tu as home/log/system et tu va deplacer le fichier fichier.txt de system au dossier log",example:"mv fichier.txt ../system/fichier.txt"}
-  ]
-    // tableau d'objet pour les niveaux 
-    const levels=[
-      {
-        id:1,
-        filesystem:filesystemInitial,
-        introText:introText,
-        objectiveIntro:objectiveIntro,
-        checkWin:(commandLine)=> commandLine.trim()==="7291",
-        useCodeInput:true,
-        course:course1
-
-      },{
-        id:2,
-        filesystem:filesystemLevel2,
-        introText:level2Intro,
-        objectiveIntro:level2Objective,
-        useCodeInput:false,
-        checkWin: (filesystem) => filesystem.children.home.children.securite?.children["code_alarme.txt"] !== undefined,
-        course:course2,
-        
-      }
-    ]
+import { updateAtPath,removeAtPath,toChildrenPath } from "../engine/pathUtils"
+import { resolvePath } from "../engine/resolvePath"
+import { initialState,terminalReducer } from "../engine/terminalReducer"
+import { executeCommand } from '../engine/executeCommand';
+import { levels } from "../levels";
 
 
   // Quand c'est bon 
@@ -121,10 +11,7 @@ const filesystemInitial={
     return commandLine.trim() === "7291";
   }
 
-  
-
-
-
+ 
 export default function Terminal() {
   const [state, dispatch] = useReducer(terminalReducer, initialState);
   const inputRef = useRef(null);
