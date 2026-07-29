@@ -1,4 +1,6 @@
 import { useReducer, useRef, useEffect, useState } from "react"
+import { updateAtPath,removeAtPath,toChildrenPath } from "./engine/pathUtils"
+import { resolvePath } from "./engine/resolvePath"
 // chemin por le premier niveau mais surout modifiable pour les prochain niveau grace au useState 
 const filesystemInitial={
   type:"dir",
@@ -112,37 +114,8 @@ const filesystemInitial={
     ]
 
 
-// FONCTION POUR LES CHEMIN 
-function resolvePath(fs,currentPath,target){
-  // On decide d'ou on part racine si absolu , currentPath si absolu 
-  let pathSegments = target.startsWith("/") ? [] : [...currentPath];
-  // decoupe le reste du chemin en segment individuels 
-  const targetSegments = target.split("/").filter(Boolean);
 
- for(const segment of targetSegments){
-    if(segment ===".."){
-      // on enelve un 
-      pathSegments=pathSegments.slice(0,-1)
-    }
-    else if(segment==="."){
-      // on ignore
-    }else{
-      pathSegments=[...pathSegments,segment]
-    }
- }
 
-  let node = fs;
-
-  for(const segment of pathSegments){
-
-    if(node.type !== "dir" || !node.children[segment]){
-      return { error: `chemin introuvable : ${target}` };
-    }
-     node = node.children[segment];
-  }
-  return { node, path: pathSegments };
-
-}
 
 // POUR LE REDUCER 
 const initialState = {
@@ -367,45 +340,7 @@ function executeCommand(commandLine,state,filesystem){
 
   
 
-    // cette fonction fait 2 chose elle retire le fichier de son emplacement et l'ajoute a son nouvelle emplacement 
-function updateAtPath(obj,path,newValue){
-  if(path.length === 0){
-    return newValue;
-  }
 
-  const [first,...rest] = path;
-  return{
-    ...obj,
-    // On utilise les crochet pour que cela devienne le nom de la cle donc ca sera first et on aura pas besoin de l'ecrire 
-    [first]: updateAtPath(obj[first],rest,newValue)
-  };
-}
-
-function removeAtPath(obj,path){
-  // si la cles existe on se place au dessus et on la supprime 
-  if(path.length ===1){
-    const copy = {...obj};
-    delete copy[path[0]];
-    return copy
-  }
-  // first premier element /home 
-  // rest => ["temps","code_alarme.txt"]=> tout le reste du tableau 
-  const [first, ...rest] = path;
-  return{
-    ...obj,
-    [first] : removeAtPath(obj[first],rest)
-  }
-}
-
-// fonction qui  permet d'ajouter children entre chaque segment(dossier fichier) comme dans l'arborescence du premier niveau c'est pour cela qu'on a un bug car on a directement acces a l'objet alors que on a besoin de children 
-function toChildrenPath(pathSegments){
-  const result= [];
-  for(const segment of pathSegments){
-    result.push("children");
-    result.push(segment)
-  }
-  return result;
-}
 
 export default function Terminal() {
   const [state, dispatch] = useReducer(terminalReducer, initialState);
@@ -567,9 +502,13 @@ export default function Terminal() {
             <p>Pour pouvoir avancé dans l'histoire il faudra que tu connaisses les bases de linux . Ne t'inquite pas ce cours va t'aider pour avancer dans l'histoire</p>
             {currentLevel.course.map((cour)=>(
               <div key={cour.cmd}>
-                <h2> {cour.cmd} </h2>
-                <p>{cour.description}</p>
-                <code> {cour.example} </code>
+                <ul>
+                  <li>{cour.cmd}  -  {cour.description}</li>
+                  <li>
+                    <code> {cour.example} </code>
+                  </li>
+                </ul>
+                
               </div>
             ))}
             
