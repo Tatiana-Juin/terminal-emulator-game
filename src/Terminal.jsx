@@ -1,6 +1,7 @@
 import { useReducer, useRef, useEffect, useState } from "react"
 import { updateAtPath,removeAtPath,toChildrenPath } from "./engine/pathUtils"
 import { resolvePath } from "./engine/resolvePath"
+import { initialState,terminalReducer } from "./engine/terminalReducer"
 // chemin por le premier niveau mais surout modifiable pour les prochain niveau grace au useState 
 const filesystemInitial={
   type:"dir",
@@ -112,45 +113,6 @@ const filesystemInitial={
         
       }
     ]
-
-
-
-
-
-// POUR LE REDUCER 
-const initialState = {
-  currentPath: ["home"],
-  history:[],
-  isWon:false
-}
-
-function terminalReducer(state,action){
-
-  switch(action.type){
-    case "ADD_LINE" : 
-      return {
-        ...state,
-        history: [...state.history, action.payload],
-      };
-      case  "NAVIGATE":
-        return{
-          ...state,
-          currentPath:action.payload,
-        }
-      case "WIN_LEVEL":
-        return{
-          ...state,
-          isWon:true
-        }
-      case "RESET":
-        return initialState
-      default :
-        return state;
-
-  }
-
-}
-// console.log(resolvePath(filesystem, ["home"], "document2"));
 
 function executeCommand(commandLine,state,filesystem){
   // split(/\s+/) pour eviter qu'il est des element vide dans le tableau 
