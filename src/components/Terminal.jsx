@@ -1,3 +1,7 @@
+import '../styles/layout.css';
+import '../styles/intro.css';
+import '../styles/terminal.css';
+import '../styles/panel.css';
 import { useReducer, useRef, useEffect, useState } from "react"
 import { updateAtPath,removeAtPath,toChildrenPath } from "../engine/pathUtils"
 import { resolvePath } from "../engine/resolvePath"
@@ -115,25 +119,15 @@ export default function Terminal() {
     <>
     {/* Pour afficher l'intro  */}
       {showIntro ?(
-        <>
+        <div>
           <p> {currentLevel.introText} </p>
           <button onClick={()=>setShowIntro(false)}>Commencer</button>
-        </>
+        </div>
       ) : (
         <>
-        <div style={{ 
-          display:"flex",
-          flexDirection:"row",
-          width:"99vw",
-          height:"99vh",
-          
-        }}>
+        <div className='app-container'>
            {/* POUR L'OBJECTIFS ET LE CODE DE DEVEROUILLAGE */}
-          <div style={{
-              display:"flex",
-              flexDirection:"column",
-              width:"50vw",
-            }}>
+          <div className='left-panel'>
             <div>
               <>
                 <h2>Objectifs</h2>
@@ -185,12 +179,7 @@ export default function Terminal() {
           </div>
 
          {/* POUR LE TERMINAL */}
-        <div style={{
-          display:"flex",
-          flexDirection:"column",
-          width:"50vw",
-          
-        }}>
+        <div className='right-panel'>
          
           <div onClick={() => inputRef.current?.focus()} 
             style={{
