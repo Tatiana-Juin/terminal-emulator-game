@@ -50,7 +50,7 @@ export default function Terminal() {
     // du texte (output), un nouveau chemin (newPath), ou une nouvelle arborescence (newFilesystem)
     const result = executeCommand(commandLine,state,filesystem);
     
-    // le dispatch pour ajouter une ligneà l'historique
+    // le dispatch pour ajouter une ligne à l'historique
     dispatch({
       type:"ADD_LINE",
       payload:{
