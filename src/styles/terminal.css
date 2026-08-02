@@ -1,0 +1,56 @@
+/* Container principal du terminal */
+.terminal-container {
+  background-color: #0c0c0c; /* Noir profond */
+  color: #e0e0e0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  padding: 1.5rem;
+  height: 100vh;
+  overflow-y: auto;
+  cursor: text;
+  box-sizing: border-box; /* Important pour que le padding ne casse pas la hauteur */
+}
+
+/* Ligne de l'historique */
+.terminal-line {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.terminal-prompt {
+  color: #00ff00; /* Vert hacker pour le nom d'utilisateur */
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.terminal-command {
+  color: #ffffff;
+}
+
+.terminal-output {
+  color: #a0a0a0; /* Gris clair pour les résultats */
+  margin-top: 2px;
+  margin-bottom: 10px;
+  white-space: pre-wrap; /* Conserve les sauts de ligne */
+}
+
+.terminal-output.error {
+  color: #ff5555; /* Rouge pour les erreurs */
+}
+
+/* Ligne de saisie active */
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  flex: 1;
+}

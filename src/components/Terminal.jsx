@@ -128,13 +128,13 @@ export default function Terminal() {
       <div className='app-container'>
            {/* POUR L'OBJECTIFS ET LE CODE DE DEVEROUILLAGE */}
           <div className='left-panel'>
-            <div>
+            <div className='objectives-section'>
               <>
                 <h2>Objectifs</h2>
                 <p> {currentLevel.objectiveIntro}</p>
 
                 {currentLevel.useCodeInput && (
-                  <>
+                <div className='unlock-code-container'>
                  <label>Code de déverrouillage : </label>
               <input
                 type="text"
@@ -142,7 +142,7 @@ export default function Terminal() {
                 onChange={(e) => setCodeInput(e.target.value)}
                 onKeyDown={handleCodeSubmit}
               />
-              </>
+              </div>
               )}
 
 
@@ -153,21 +153,21 @@ export default function Terminal() {
 
             {state.isWon  ? (
               <>
-              <p style={{color:"green"}}> Felicitation tu as réussi </p>
-              <button onClick={handleNextLevel}>Niveau suivant </button>
+              <p className='success-message'> Felicitation tu as réussi </p>
+              <button className='next-btn' onClick={handleNextLevel}>Niveau suivant </button>
               </>
             ) : codeError ? (
               <>
-                <p style={{ color:"red"}}> Ce n'est pas le bon code </p>
+                <p className='error-message'> Ce n'est pas le bon code </p>
               </>
             ): null}
 
-            <h1 style={{marginBottom:"5px"}}>Cours</h1>
-            <p>Pour pouvoir avancé dans l'histoire il faudra que tu connaisses les bases de linux . Ne t'inquite pas ce cours va t'aider pour avancer dans l'histoire</p>
+            <h1 className='course-title'>Cours</h1>
+            <p className='course-intro'>Pour pouvoir avancé dans l'histoire il faudra que tu connaisses les bases de linux . Ne t'inquite pas ce cours va t'aider pour avancer dans l'histoire</p>
             {currentLevel.course.map((cour)=>(
-              <div key={cour.cmd}>
+              <div className='course-card' key={cour.cmd}>
                 <ul>
-                  <li>{cour.cmd}  -  {cour.description}</li>
+                  <li> <strong>{cour.cmd}</strong>  -  {cour.description}</li>
                   <li>
                     <code> {cour.example} </code>
                   </li>
@@ -181,33 +181,26 @@ export default function Terminal() {
          {/* POUR LE TERMINAL */}
         <div className='right-panel'>
          
-          <div onClick={() => inputRef.current?.focus()} 
-            style={{
-              background: "#1e1e1e",
-              color: "#e0e0e0",
-              fontFamily: "monospace",
-              fontSize: "14px",
-              padding: "1rem",
-              borderRadius: "8px",
-              height: "400px",
-              overflowY: "auto",
-              cursor: "text",
-              height:"99vh"
-            }}
-          >
+          <div className='terminal-container' onClick={() => inputRef.current?.focus()} >
             {/* POUR AFFICHER L'HISTORIQUE  */}
                 {state.history.map((line,i) =>(
-                  <div key={i}>
-                    <p>user@debian: $ {line.prompt} {line.command}</p>
-                    {line.output  && 
-                      <p style={{ color: line.isError ? "red" : "white"}}> {line.output} </p>
-                    }
+                  <div className='terminal-line' key={i}>
+                    <div>
+                        <span className='terminal-prompt'>user@debian: $ {line.prompt} </span>
+                        <span className='terminal-command'>{line.command}</span>
+                    </div>
+                    
+                    {line.output  && ( 
+                       <p className={`terminal-output ${line.isError ? "error" : ""}`}>
+                        {line.output}
+                      </p>
+                    )}
                   </div>
                 ))}
 
-                <div style={{display:"flex"}}>
+                <div className='terminal-input-row'>
                     {/* pour voir ou on est  */}
-                    <p>user@debian: $ { "/" + state.currentPath.join("/")} </p>
+                    <span className='terminal-prompt'>user@debian: $ { "/" + state.currentPath.join("/")} </span>
 
                     {/* pour affiche le texte  */}
                     <input type="text" onKeyDown={handleKeyDown} ref={inputRef} style={{
