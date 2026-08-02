@@ -17,8 +17,7 @@
   line-height: 1.8;
   margin-bottom: 3rem;
   text-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
- 
- 
+  text-align:left;
 }
 
 /* Bouton d'action style terminal */
@@ -35,8 +34,8 @@
   letter-spacing: 2px;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
-}
 
+}
 
 .intro-button:hover {
   background-color: #00ff00;
