@@ -28,7 +28,7 @@
 }
 
 .terminal-output {
-  color: #a0a0a0; /* Gris clair pour les résultats */
+  color: white; /* Gris clair pour les résultats */
   margin-top: 2px;
   margin-bottom: 10px;
   white-space: pre-wrap; /* Conserve les sauts de ligne */

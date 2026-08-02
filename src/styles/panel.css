@@ -24,6 +24,10 @@
   letter-spacing: 1px;
   font-size: 1.2rem;
 }
+.objectives-section p{
+    color:white;
+    font-weight: bolder;
+}
 
 /* Zone du code de déverrouillage */
 .unlock-code-container {
@@ -31,6 +35,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.unlock-code-container label{
+    color:white;
 }
 
 .code-input {
@@ -112,6 +120,7 @@
 .course-card li {
   margin-bottom: 8px;
   line-height: 1.4;
+  color:white;
 }
 
 .course-card code {
