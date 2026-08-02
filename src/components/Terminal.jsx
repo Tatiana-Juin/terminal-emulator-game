@@ -119,13 +119,13 @@ export default function Terminal() {
     <>
     {/* Pour afficher l'intro  */}
       {showIntro ?(
-        <div>
-          <p> {currentLevel.introText} </p>
-          <button onClick={()=>setShowIntro(false)}>Commencer</button>
+        <div className='intro-container'>
+          <p className='intro-text'> {currentLevel.introText} </p>
+          <button className='intro-button' onClick={()=>setShowIntro(false)}>Commencer</button>
         </div>
       ) : (
         <>
-        <div className='app-container'>
+      <div className='app-container'>
            {/* POUR L'OBJECTIFS ET LE CODE DE DEVEROUILLAGE */}
           <div className='left-panel'>
             <div>

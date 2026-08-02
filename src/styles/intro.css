@@ -1,0 +1,45 @@
+.intro-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0c0c0c;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 2rem;
+    text-align: center;
+}
+/* Style du texte de l'histoire */
+.intro-text {
+  font-size: 1.4rem;
+  max-width: 750px;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+ 
+ 
+}
+
+/* Bouton d'action style terminal */
+.intro-button {
+  background-color: transparent;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+
+.intro-button:hover {
+  background-color: #00ff00;
+  color: #0c0c0c;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+}
