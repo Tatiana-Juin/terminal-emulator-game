@@ -1,6 +1,7 @@
 import { resolvePath } from "./resolvePath";
 import { updateAtPath,removeAtPath,toChildrenPath } from "./pathUtils";
 import { findFile } from "./findFile";
+import { grep } from "./grepFile";
 export function executeCommand(commandLine,state,filesystem){
   // split(/\s+/) pour eviter qu'il est des element vide dans le tableau 
   const [cmd,...args] = commandLine.trim().split(/\s+/);
@@ -190,6 +191,21 @@ export function executeCommand(commandLine,state,filesystem){
         }
         // sinon on retroune le chemin 
         return{output:"/" + result.join("/")};
+      }
+      case "grep":{
+        const targetWord = args[0];
+        if(!targetWord){
+          return{output:result.error,isError:true};
+        }
+        const result = resolvePath(filesystem,state.currentPath,".");
+        if(result.error){
+          return{output:result.error,isError:true};
+        }
+        const matches = grep(result.node,targetWord);
+        if(matches.length ===0){
+          return{output:`aucune correspondance pour ${targetWord}`,isError:true};
+        }
+        return {output:matches.join("\n")};
       }
       // en cas d'erreur 
       default:
