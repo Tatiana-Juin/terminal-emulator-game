@@ -1,5 +1,6 @@
 import { resolvePath } from "./resolvePath";
 import { updateAtPath,removeAtPath,toChildrenPath } from "./pathUtils";
+import { findFile } from "./findFile";
 export function executeCommand(commandLine,state,filesystem){
   // split(/\s+/) pour eviter qu'il est des element vide dans le tableau 
   const [cmd,...args] = commandLine.trim().split(/\s+/);
@@ -171,6 +172,24 @@ export function executeCommand(commandLine,state,filesystem){
           newFilesystem: filesystemAfterAdd
         }
 
+      }
+
+      // pour find 
+      case "find":{
+        // recuperer 1er argument , element que l'on a taper 
+        const targetName= args[0];
+        // si il existe pas message erreur 
+        if(!targetName){
+          return{output:"usage : find<nom>",isError:true};
+        }
+        // on appelle la fonction 
+        const result= findFile(filesystem,targetName,[]);
+        // si le fichier a trouver existe pas on retroune un message erreur 
+        if(!result){
+          return{output:`fichier introuvable ${targetName}`,isError:true};
+        }
+        // sinon on retroune le chemin 
+        return{output:"/" + result.join("/")};
       }
       // en cas d'erreur 
       default:

@@ -27,7 +27,7 @@ export default function Terminal() {
   const [codeError,setCodeError] = useState(false)
   
   // useState pour savoir a quel niveau on est c'est la position dans le tableau 
-  const [currentLevelIndex,setCurrentLevelIndex] = useState(0)
+  const [currentLevelIndex,setCurrentLevelIndex] = useState(2)
   const currentLevel = levels[currentLevelIndex];
   // pour le chemin 
   const [filesystem,setFilesystem] = useState(currentLevel.filesystem);
