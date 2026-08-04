@@ -35,7 +35,7 @@ export const filesystemLevel4={
                                 sous_dossier_2:{
                                     type:"dir",
                                     children:{
-                                        "cle_securite.txt":{type:"file",content: "BRAVO ! Le code de redémarrage est : 7894-XYZ"}
+                                        "cle_securite.txt":{type:"file",content: "BRAVO ! Le code de redémarrage est : 7894"}
                                     }
                                 },
                                 sous_dossier_3:{type:"dir",children:{}}
@@ -71,6 +71,8 @@ export const level4={
     filesystem:filesystemLevel4,
     introText:level4Intro,
     objectiveIntro:level4Objective,
-    useCodeInput:false,
+    checkWin:(commandLine) => commandLine.trim()==="7894",
+    useCodeInput:true,
+    
     course:course4
 }

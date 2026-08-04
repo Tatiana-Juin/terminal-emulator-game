@@ -86,6 +86,9 @@ export default function Terminal() {
           })
       }
     }
+
+  
+
     // on vide le champs
     e.target.value ="";
   
@@ -135,7 +138,7 @@ export default function Terminal() {
 
                 {currentLevel.useCodeInput && (
                 <div className='unlock-code-container'>
-                 <label>Code de déverrouillage : </label>
+                 <label>Solution : </label>
               <input
                 type="text"
                 value={codeInput}

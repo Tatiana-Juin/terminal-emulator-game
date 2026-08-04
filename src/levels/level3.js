@@ -72,6 +72,7 @@ export const level3={
     filesystem:filesystemLevel3,
     introText:level3Intro,
     objectiveIntro:level3Objective,
-    useCodeInput:false,
+    checkWin:(commandLine) =>commandLine.trim().toLowerCase()==="paquet7.txt",
+    useCodeInput:true,
     course:course3
 }
