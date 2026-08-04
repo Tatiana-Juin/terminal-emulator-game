@@ -10,7 +10,7 @@ export const filesystemLevel4={
                 bureau:{
                     type:"dir",
                     children:{
-                        "note.txt":{type:"dir",content:"La clé a été archivée hier, mais je ne sais plus dans quel sous-dossier..."}
+                        "note.txt":{type:"file",content:"La clé a été archivée hier, mais je ne sais plus dans quel sous-dossier..."}
                     }
                 },
                 archives:{
@@ -71,6 +71,6 @@ export const level4={
     filesystem:filesystemLevel4,
     introText:level4Intro,
     objectiveIntro:level4Objective,
-    useCodeInput:true,
+    useCodeInput:false,
     course:course4
 }
