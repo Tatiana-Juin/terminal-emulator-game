@@ -12,9 +12,9 @@ export const filesystemLevel3={
                         log:{
                             type:"dir",
                             children:{
-                                "reseaux.txt":{
+                                "alert.txt":{
                                     type:"file",
-                                    content:"plusieurs paquet suspect detecter . Il sont dans le dossier network. "
+                                    content:"plusieurs paquet suspect detecter . Il sont dans le dossier network. Il a la nouvelle attque du hacker "
                                 }
                             }
                         },
@@ -57,12 +57,12 @@ export const filesystemLevel3={
         }
     }
 }
-export const level3Intro="L'alarme c'est arreter mais un flux de données apparait - une interception du haker qui a vue ce que tu as fait . "
+export const level3Intro="L'alarme s'arrete mais le le hacker tente une contre attaque . Il a un plein de paquet qui apparaissent . Dans le dossier logs un fichier alert.txt previens le joueur de la prochaine attaque qui est une COUPURE de courrant   "
 
-export const level3Objective = "trouve la commande qui viens d'envoyer ";
+export const level3Objective = "utilise grep et trouve dans quel fichier il a le mot COUPURE pour savoir s'il compte faire autre chose .  ";
 
 export const course3=[
-     { cmd: "find", description: "cherche un fichier par son nom dans toute l'arborescence.", example: "find config_reseau.txt" },
+     
     { cmd: "grep", description: "cherche un mot dans le contenu des fichiers du dossier actuel.", example: "grep COUPURE" },
     ...course2
 ]
