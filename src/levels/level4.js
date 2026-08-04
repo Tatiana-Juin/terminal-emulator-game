@@ -57,7 +57,7 @@ export const filesystemLevel4={
     }
 }
 
-export const level4Intro = "Alors que tu a reussi a trouver le fichier  une coupure de courrant survient  les generateur de secourt prenne le relais La porte va se fermer .  ";
+export const level4Intro = "Alors que tu a reussi a trouver le fichier  une coupure de courrant survient  les generateur de secourt prend  le relais La porte va se fermer .  ";
 
 export const level4Objective="Tu dois rapidement trouver le code qui est dans le fichier cle_securite.txt . utilise la commande find pour cela . ";
 
@@ -73,6 +73,5 @@ export const level4={
     objectiveIntro:level4Objective,
     checkWin:(commandLine) => commandLine.trim()==="7894",
     useCodeInput:true,
-    
     course:course4
 }

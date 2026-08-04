@@ -115,6 +115,7 @@ export default function Terminal() {
         type:"RESET"
       })
       setShowIntro(true);
+      setCodeInput("");
     }
     
     
