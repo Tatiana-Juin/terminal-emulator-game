@@ -90,6 +90,12 @@ export function executeCommand(commandLine,state,filesystem){
             isError:true
           }
         }
+
+        if(result.node.locked){
+          return{
+            output:"Permission refusé fichier verrouillé utilisé chmod "
+          };
+        }
         return{
           output:result.node.content
         }
@@ -195,7 +201,7 @@ export function executeCommand(commandLine,state,filesystem){
       case "grep":{
         const targetWord = args[0];
         if(!targetWord){
-          return{output:result.error,isError:true};
+          return{output:"Erreur grep<nom>",isError:true};
         }
         const result = resolvePath(filesystem,state.currentPath,".");
         if(result.error){
@@ -206,6 +212,41 @@ export function executeCommand(commandLine,state,filesystem){
           return{output:`aucune correspondance pour ${targetWord}`,isError:true};
         }
         return {output:matches.join("\n")};
+      }
+      case "chmod":{
+        // recuperer ce qu'a ecris l'utilisateur 
+        const mode=args[0]; // recuperer ["400"]
+        const target = args[1]; // recupere nom fichier 
+        // erreur si ca existe pas
+        if(!mode || !target){
+          return{
+            output:"Il a une erreur chmod <mode> <fichier>",isError:true
+          }
+        }
+
+        if(mode !== "400"){
+          return{output:"mode non supporter c'est 400 le mode", isError:true};
+        }
+        
+         const result = resolvePath(filesystem,state.currentPath,target);
+         if(result.error){
+           return{output:result.error,isError:true};
+         }
+
+         if(result.node.type !=="file" ){
+          return{
+            output:"erreur ca doit etre un fichier",
+            isError:true
+          }
+         }
+
+         const newFilesystem = updateAtPath(
+          filesystem,
+          toChildrenPath(result.path),
+          {...result.node,locked:false}
+         );
+         return {output:"",newFilesystem:newFilesystem}
+        
       }
       // en cas d'erreur 
       default:
