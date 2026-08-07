@@ -124,6 +124,14 @@ export function executeCommand(commandLine,state,filesystem){
             isError:true
           }
         }
+
+        // pour que ca deplace pas le fichier si c'est verrouillé 
+        if(resultSource.node.locked){
+          return{
+            output:"Permission refusé fichier verrouillé utilisé chmod",
+            isError:true
+          }
+        }
         // ==========================================
         // lOGIQUE DE VERIFICATION
         // ==========================================
