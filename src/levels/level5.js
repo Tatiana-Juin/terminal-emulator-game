@@ -1,4 +1,4 @@
-import { introText, objectiveIntro } from "./level1";
+// import { introText, objectiveIntro } from "./level1";
 import { course4 } from "./level4";
 
 export const filesystemLevel5={
