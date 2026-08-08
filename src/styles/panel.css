@@ -133,3 +133,18 @@
   display: inline-block;
   margin-top: 5px;
 }
+
+/* POUR LES PETIT ECRAN  */
+@media (max-width: 768px) {
+  .left-panel {
+    border-right: none;
+    border-bottom: 2px solid #333; 
+    padding: 1rem;
+  }
+  .course-title {
+    font-size: 1.2rem;
+  }
+  .unlock-code-container {
+    flex-wrap: wrap; 
+  }
+}

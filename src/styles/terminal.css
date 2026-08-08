@@ -5,7 +5,7 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
   padding: 1.5rem;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
   cursor: text;
   box-sizing: border-box; /* Important pour que le padding ne casse pas la hauteur */
@@ -53,4 +53,14 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
   flex: 1;
+}
+
+/* POUR LES PETIT ECRANS  */
+@media (max-width: 768px) {
+  .terminal-container {
+    padding: 1rem;
+  }
+  .terminal-input-row {
+    flex-wrap: wrap; 
+  }
 }

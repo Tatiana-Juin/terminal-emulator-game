@@ -42,3 +42,15 @@
   color: #0c0c0c;
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
 }
+
+/* pour petit ecran  */
+@media (max-width: 768px) {
+  .intro-text {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  .intro-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}

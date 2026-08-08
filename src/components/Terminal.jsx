@@ -157,7 +157,13 @@ export default function Terminal() {
             {state.isWon  ? (
               <>
               <p className='success-message'> Felicitation tu as réussi </p>
-              <button className='next-btn' onClick={handleNextLevel}>Niveau suivant </button>
+
+              {currentLevelIndex +1 >= levels.length ?(
+                <p>Tu as terminer le jeu.</p>
+              ) :(
+                <button className='next-btn' onClick={handleNextLevel}>Niveau suivant </button>
+              )}
+              
               </>
             ) : codeError ? (
               <>
