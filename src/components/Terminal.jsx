@@ -121,8 +121,12 @@ export default function Terminal() {
     
   return (
     <>
-    {/* Pour afficher l'intro  */}
-      {showIntro ?(
+    {(state.isWon && currentLevelIndex + 1 >= levels.length) ?( 
+      <div className='intro-container'>
+        {/* ecran de fin  */}
+          <p className='intro-text'> Félicitations le virus du hacker est neutraliser et son enprise sur le batiment est terminé . Tu es enfin libre est le hacker n'a plus ancune emprise sur le batiment .La police arrive est l'arrête.  </p>
+      </div>
+      ):showIntro ?(
         <div className='intro-container'>
           <p className='intro-text'> {currentLevel.introText} </p>
           <button className='intro-button' onClick={()=>setShowIntro(false)}>Commencer</button>
