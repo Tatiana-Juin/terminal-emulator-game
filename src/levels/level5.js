@@ -22,12 +22,12 @@ export const filesystemLevel5={
     }
 }
 
-export const level5Intro = "Tu as trouver le code felicitations . La porte s'ouvre par contre tu voie un fichier hacker_trace.log qui contient l'ip du hacker . Tu ne pas lire le fichier car tu n'y a pas acces. Tu na pas le droit de lecture.";
+export const level5Intro = "Tu as trouver le code felicitations . Le systeme redemarre et tu voie un fichier hacker_trace.log qui peut te donner des information sur le hacker.  Tu ne pas lire le fichier car tu n'y a pas acces. Tu na pas le droit de lecture.";
 
-export const level5Objective = "Il va falloir que tu change cela. Pour cela tu va devoir utiliser chmod et le code 400. Des que c'est fait lit le fichier et donne moi l'adresse ip ";
+export const level5Objective = "Il va falloir que tu change cela. Pour cela tu va devoir utiliser chmod et le code 400. Des que c'est fait lie le fichier et donne moi l'adresse ip ";
 
 export const course5=[
-    {cmd:"chmod",description:"Modifier les permission sur un fichier ",example:"chmod 644 (toi 4(lire) + 2(ecriture), groupe = 4 (lecture), autre 4 (lecture)"},
+    {cmd:"chmod",description:"Modifier les permission sur un fichier ",example:"chmod 644 nomFichier.txt (toi 4(lire) + 2(ecriture), groupe = 4 (lecture), autre 4 (lecture)"},
     ...course4
 ];
 export const level5={

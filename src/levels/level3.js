@@ -57,9 +57,9 @@ export const filesystemLevel3={
         }
     }
 }
-export const level3Intro="L'alarme s'arrete mais le le hacker tente une contre attaque . Il a un plein de paquet qui apparaissent . Dans le dossier logs un fichier alert.txt previens le joueur de la prochaine attaque qui est une COUPURE de courrant   "
+export const level3Intro="Tu as deplacer le fichier et l'alarme s'arrete mais le hacker tente une contre attaque . Tout d'un coup tu voie plein de paquet qui apparaisse à l'ecran .  Tu essaie de comprendre ce qui se passe . Il est entrain de préparer ca prochaine attaque . Mais tu ne sais pas c'est quoi. En regardant de plus pres tu t'apercoit qu'il veut couper le courrant .   "
 
-export const level3Objective = "utilise grep et trouve dans quel fichier il a le mot COUPURE pour savoir s'il compte faire autre chose . Entre le nom du fichier et son extension  dans input solution ";
+export const level3Objective = "Trouve le fichier en utilisant grep ou il a le mot COUPURE et entre son nom et son extension.   ";
 
 export const course3=[
      

@@ -126,6 +126,7 @@ export default function Terminal() {
         {/* ecran de fin  */}
           <p className='intro-text'> Félicitations le virus du hacker est neutraliser et son enprise sur le batiment est terminé . Tu es enfin libre est le hacker n'a plus ancune emprise sur le batiment .La police arrive est l'arrête.  </p>
       </div>
+      // INTRO
       ):showIntro ?(
         <div className='intro-container'>
           <p className='intro-text'> {currentLevel.introText} </p>
