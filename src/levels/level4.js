@@ -62,7 +62,7 @@ export const level4Intro = "Alors que tu as réussi à trouver le fichier, une c
 export const level4Objective="Tu dois rapidement trouver le code qui est dans le fichier cle_securite.txt . Utilise la commande find pour cela. Grâce à cela, tu va pouvoir redémarrer le système. ";
 
 export const course4=[
-    { cmd: "find", description: "cherche un fichier par son nom dans toute l'arborescence.", example: "find config_reseau.txt" },
+    { cmd: "find", description: "Cherche un fichier par son nom dans toute l'arborescence.", example: "find config_reseau.txt" },
     ...course3
 ];
 

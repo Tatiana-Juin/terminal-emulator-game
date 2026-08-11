@@ -43,7 +43,7 @@ export const filesystemInitial={
     { cmd:"pwd", description:"affiche à quel endroit tu es actuellement dans l'arborescence. ",example:"pwd"},
     {cmd:"ls", description:"liste les fichiers et dossiers présents à l'endroit où tu es.",example:"ls"},
     {cmd:"cd[dossier]",description:"Permet de te déplacer dans un dossier",example:"cd dossier"},
-    {cmd:"cd ..",description:"Te fait remonter d'un niveau si tu as par exemple home/log/system est que tu es dans system et que tu veux aller dans log tu vas faire",example:"cd .."},
+    {cmd:"cd ..",description:"Te fait remonter d'un niveau. Si, par exemple, tu es dans  home/log/system est que tu veux aller dans log tu vas faire:",example:"cd .."},
     {cmd:"cat",description:"Affiche le contenu d'un fichier",example:"cat fichier.txt"}
   ]
 

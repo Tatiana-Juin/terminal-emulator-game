@@ -27,7 +27,7 @@ export const level5Intro = "Tu as trouvé le code felicitations ! Le systeme red
 export const level5Objective = "Il va falloir que tu change cela (donne le droit de lecture). Pour cela tu va devoir utiliser chmod et le code 400. Dès que c'est fait, lis le fichier et donne moi l'adresse IP du hacker. ";
 
 export const course5=[
-    {cmd:"chmod",description:"Modifier les permissions sur un fichier ",example:"chmod 644 nomFichier.txt (toi 4(lire) + 2(ecriture), groupe = 4 (lecture), autre 4 (lecture)"},
+    {cmd:"chmod",description:"Modifie les permissions sur un fichier ",example:"chmod 644 nomFichier.txt (toi 4(lire) + 2(ecriture), groupe = 4 (lecture), autre 4 (lecture)"},
     ...course4
 ];
 export const level5={

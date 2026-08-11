@@ -63,7 +63,7 @@ export const level3Objective = "Trouve le fichier en utilisant grep où il y a l
 
 export const course3=[
      
-    { cmd: "grep", description: "cherche un mot dans le contenu des fichiers du dossier actuel.", example: "grep COUPURE" },
+    { cmd: "grep", description: "Cherche un mot dans tous les fichier du dossier actuel. Retourne ne lom du fichier. On met grep et apres le mot. ", example: "grep TROUVER" },
     ...course2
 ]
 

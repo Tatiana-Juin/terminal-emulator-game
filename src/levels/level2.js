@@ -36,7 +36,7 @@ import { course1} from "./level1";
 
 
   export const course2=[
-    {cmd:"mv",description:"deplace un fichier d'un dossier a un autre. Par example tu as home/log/system et tu va deplacer le fichier fichier.txt de system au dossier log",example:"mv fichier.txt ../system/fichier.txt"},
+    {cmd:"mv",description:"Déplace un fichier d'un dossier à un autre. Par example tu es dans  home/log/system et tu veux  déplacer le fichier fichier.txt de system au dossier log. Tu vas faire : ",example:"mv fichier.txt ../system/fichier.txt"},
     ...course1,
     
   ]
