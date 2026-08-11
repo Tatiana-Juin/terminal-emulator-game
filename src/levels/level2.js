@@ -30,9 +30,9 @@ import { course1} from "./level1";
     }
   }
 
-  export const level2Intro="La porte s'ouvre et tu te sens mieux mais d'ou d'un coup tu entent une alarme . Tu as peur car tu sais que ca va prévenir le hacker . Tu essaie de l'arreter. Tu n'y arrive pas. Tu va sur ton ordinateur et tu t'aperçoit que le dossier securité est vide. ";
+  export const level2Intro="La porte s'ouvre et tu te sens mieux, mais tout d'un coup tu entends une alarme . Tu as peur, car tu sais que ça va prévenir le hacker . Tu essaies de l'arrêter. Tu n'y arrive pas. Tu vas sur ton ordinateur et tu t'aperçois que le dossier sécurité est vide. ";
 
-  export const level2Objective="Tu dois trouver le fichier et le deplacer dans le dossier securite pour arreter l'alarme . "
+  export const level2Objective="Tu dois trouver le fichier et le déplacer dans le dossier securite pour arrêter l'alarme. "
 
 
   export const course2=[

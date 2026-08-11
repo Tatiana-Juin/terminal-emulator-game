@@ -57,9 +57,9 @@ export const filesystemLevel3={
         }
     }
 }
-export const level3Intro="Tu as deplacer le fichier et l'alarme s'arrete mais le hacker tente une contre attaque . Tout d'un coup tu voie plein de paquet qui apparaisse à l'ecran .  Tu essaie de comprendre ce qui se passe . Il est entrain de préparer ca prochaine attaque . Mais tu ne sais pas c'est quoi. En regardant de plus pres tu t'apercoit qu'il veut couper le courrant .   "
+export const level3Intro="Tu as déplacé le fichier et l'alarme s'arrête, mais le hacker tente une contre-attaque. Tout d'un coup, tu voie plein de paquets qui apparaissent à l'ecran. Tu essaies de comprendre ce qui se passe. Il est entrain de préparer sa prochaine attaque. Mais tu ne sais pas ce que c'est. En regardant de plus près, tu t'aperçois qu'il veut couper le courrant .   "
 
-export const level3Objective = "Trouve le fichier en utilisant grep ou il a le mot COUPURE et entre son nom et son extension.   ";
+export const level3Objective = "Trouve le fichier en utilisant grep où il y a le mot COUPURE et entre son nom et son extension.   ";
 
 export const course3=[
      

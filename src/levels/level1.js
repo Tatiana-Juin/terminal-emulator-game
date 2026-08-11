@@ -34,9 +34,9 @@ export const filesystemInitial={
   }
 }
 // Intro pour le texte
-  export const introText = ` Tu es à ton travail devant  ton ordinateur d'ou d'un coup la porte du bureau se ferme. Tu te sens mal . Tu veux sortir mais il a un code que tu ne connais pas .   ` 
+  export const introText = ` Tu es à ton travail devant  ton ordinateur, quand tout d'un coup, la porte du bureau se ferme. Tu te sens mal . Tu veux sortir, mais il y a un code que tu ne connais pas .   ` 
   
-  export const objectiveIntro ="Tu dois trouver rapidement le code pour cela tu navigue entre les différents dossier et fichier mais le temps est compter .   "
+  export const objectiveIntro ="Tu dois trouver rapidement le code. Pour cela, tu navigue entre les différents dossiers et fichiers, mais le temps est compté.   "
 
   // POUR LES COURS 
   export const course1 = [

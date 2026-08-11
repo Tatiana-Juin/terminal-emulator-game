@@ -124,7 +124,7 @@ export default function Terminal() {
     {(state.isWon && currentLevelIndex + 1 >= levels.length) ?( 
       <div className='intro-container'>
         {/* ecran de fin  */}
-          <p className='intro-text'> Félicitations le virus du hacker est neutraliser et son enprise sur le batiment est terminé . Tu es enfin libre est le hacker n'a plus ancune emprise sur le batiment .La police arrive est l'arrête.  </p>
+          <p className='intro-text'> Félicitations le virus du hacker est neutralisé et son enprise sur le bâtiment est terminée . Tu es enfin libre est le hacker n'a plus ancune emprise sur le bâtiment .La police arrive chez lui et l'arrête.  </p>
       </div>
       // INTRO
       ):showIntro ?(
@@ -139,7 +139,7 @@ export default function Terminal() {
           <div className='left-panel'>
             <div className='objectives-section'>
               <>
-                <h2>Objectifs</h2>
+                <h2>Objectif</h2>
                 <p> {currentLevel.objectiveIntro}</p>
 
                 {currentLevel.useCodeInput && (

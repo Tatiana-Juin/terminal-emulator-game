@@ -57,9 +57,9 @@ export const filesystemLevel4={
     }
 }
 
-export const level4Intro = "Alors que tu a reussi a trouver le fichier une coupure de courrant survient. Le hcker à était plus rapide . Le generateur de secour prend  le relais mais il ne tiendra que quelque minute .    ";
+export const level4Intro = "Alors que tu as réussi à trouver le fichier, une coupure de courrant survient. Le hacker à été plus rapide. Le générateur de secours prend le relais, mais il ne tiendra que quelques minutes.    ";
 
-export const level4Objective="Tu dois rapidement trouver le code qui est dans le fichier cle_securite.txt . utilise la commande find pour cela . Comme ca tu va pouvoir redemarrer le system. ";
+export const level4Objective="Tu dois rapidement trouver le code qui est dans le fichier cle_securite.txt . Utilise la commande find pour cela. Grâce à cela, tu va pouvoir redémarrer le système. ";
 
 export const course4=[
     { cmd: "find", description: "cherche un fichier par son nom dans toute l'arborescence.", example: "find config_reseau.txt" },
