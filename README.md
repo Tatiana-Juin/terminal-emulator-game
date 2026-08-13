@@ -10,7 +10,7 @@ Un jeu web pédagogique pour apprendre les bases du terminal linux à travers un
  - **JavaScript (ES6+)** - aucune librairie externe pour le moteur de jeu 
  - **CSS pur** pour le design
 
-## Ce que le joeur apprends 
+## Ce que le joueur apprends 
  | Niveau | Commandes | Concept |
  |--------|-----------|---------|
  | 1 | `pwd`,`ls`,`cd`,`cat` | Navigation et lecture de fichiers |
