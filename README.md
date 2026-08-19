@@ -19,3 +19,19 @@ Un jeu web pédagogique pour apprendre les bases du terminal linux à travers un
  | 4 | `find` | Recherche de fichiers |
  | 5 6 | `chmod` | Changer les permissions |
 
+## Défis techniques rencontrés 
+- **Ssytème de fichier virtuel récursif**: navigation, création et suppression imutable dans une structure arborescente profondément imbriqué.
+- **Parsing de chemin**: gestion de chemin absolus, relatifs, et des segments spéciaux (`.`,`..`) mélangé dans un même chemin.
+- **Recherche récursive**: (`find`) vs. recherche locale (`grep`): deux algorithmes distincts pour deux besoins différents.
+
+## Installation 
+````
+git clone https://github.com/Tatiana-Juin/terminal-emulator-game
+
+npm install 
+
+npm run dev
+````
+
+
+
