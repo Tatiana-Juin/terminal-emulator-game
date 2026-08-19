@@ -1,4 +1,4 @@
-# Jeu pour apprendre les ligne de commande 
+# termEscape - Jeu pour apprendre les ligne de commande 
 
 Un jeu web pédagogique pour apprendre quelques lignes de commande linux comme ls  à travers une histoire interactive.
 
