@@ -1,6 +1,6 @@
 # Jeu pour apprendre les ligne de commande 
 
-Un jeu web pédagogique pour apprendre les bases du terminal linux à travers une histoire interactive.
+Un jeu web pédagogique pour apprendre quelques lignes de commande linux comme ls  à travers une histoire interactive.
 
  ## Concept 
  Un hacker c'est infiltré dans ton systeme . A travers 6 niveaux , apprends à naviguer, manipulé ddes fichier , rechercher du contenu et gérer des permissions - en utilisant des vraies commande Linux dans un terminal simulé . 
