@@ -26,7 +26,7 @@ Un jeu web pédagogique pour apprendre quelques lignes de commande linux comme l
 
 ## Installation 
 ````
-git clone https://github.com/Tatiana-Juin/terminal-emulator-game
+git clone https://github.com/Tatiana-Juin/termEscape.git
 
 npm install 
 
