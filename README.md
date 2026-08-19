@@ -3,7 +3,7 @@
 Un jeu web pédagogique pour apprendre quelques lignes de commande linux comme ls  à travers une histoire interactive.
 
  ## Concept 
- Un hacker c'est infiltré dans ton systeme . A travers 6 niveaux , apprends à naviguer, manipulé ddes fichier , rechercher du contenu et gérer des permissions - en utilisant des vraies commande Linux dans un terminal simulé . 
+ Un hacker c'est infiltré dans ton systeme . A travers 6 niveaux , apprends à naviguer, manipulé des fichiers , rechercher du contenu et gérer des permissions, en utilisant des vraies commande Linux dans un terminal simulé . 
 
  ## Stack technique 
  - **React** (Vite)
