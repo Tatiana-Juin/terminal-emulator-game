@@ -22,9 +22,9 @@ export const filesystemLevel5={
     }
 }
 
-export const level5Intro = "Tu as trouvé le code felicitations ! Le systeme redémarre et tu vois un fichier hacker_trace.log qui peut te donner des informations sur le hacker.  Tu ne peux pas lire le fichier, car tu n'y as pas accès. Tu n'a pas les droits de lecture.";
+export const level5Intro = "Tu as trouvé le code félicitations ! Le système redémarre et tu vois un fichier hacker_trace.log qui peut te donner des informations sur le hackeur.  Tu ne peux pas lire le fichier, car tu n'y as pas accès. Tu n'a pas les droits de lecture.";
 
-export const level5Objective = "Il va falloir que tu change cela (donne le droit de lecture). Pour cela tu va devoir utiliser chmod et le code 400. Dès que c'est fait, lis le fichier et donne moi l'adresse IP du hacker. ";
+export const level5Objective = "Il va falloir que tu changes cela (donne le droit de lecture). Pour cela tu va devoir utiliser chmod et le code 400. Dès que c'est fait, lis le fichier et donne moi l'adresse IP du hackeur. ";
 
 export const course5=[
     {cmd:"chmod",description:"Modifie les permissions sur un fichier ",example:"chmod 644 nomFichier.txt (toi 4(lire) + 2(ecriture), groupe = 4 (lecture), autre 4 (lecture)"},

@@ -57,7 +57,7 @@ export const filesystemLevel4={
     }
 }
 
-export const level4Intro = "Alors que tu as réussi à trouver le fichier, une coupure de courrant survient. Le hacker à été plus rapide. Le générateur de secours prend le relais, mais il ne tiendra que quelques minutes.    ";
+export const level4Intro = "Alors que tu as réussi à trouver le fichier, une coupure de courant survient. Le hackeur a été plus rapide. Le générateur de secours prend le relais, mais il ne tiendra que quelques minutes.    ";
 
 export const level4Objective="Tu dois rapidement trouver le code qui est dans le fichier cle_securite.txt . Utilise la commande find pour cela. Grâce à cela, tu va pouvoir redémarrer le système. ";
 

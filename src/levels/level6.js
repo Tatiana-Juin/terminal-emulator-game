@@ -39,9 +39,9 @@ export const filesystemLevel6={
     }
 }
 
-export const level6Intro="Grâce à l'IP , tu accédes au système du hacker. C'est le moment de le neutraliser définitivement, mais il a piégé son propore terrain pour ralentir toute intrusion.";
+export const level6Intro="Grâce à l'IP , tu accèdes au système du hackeur. C'est le moment de le neutraliser définitivement, mais il a piégé son propore terrain pour ralentir toute intrusion.";
 
-export const level6Objective="Localise le virus,désactive sa protection avec chmod (400), puis neutralise-le en le deplaçant vers la corbeille.";
+export const level6Objective="Localise le virus,désactive sa protection avec chmod (400), puis neutralise-le en le déplaçant vers la corbeille.";
 
 export const course6=[
     ...course5
