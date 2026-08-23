@@ -95,15 +95,19 @@ export default function Terminal() {
 }
 
       // Fonction pour le code a saisir 
-    function handleCodeSubmit(e) {
-      if (e.key !== "Enter") return;
-      if (currentLevel.checkWin(codeInput)) {
-        dispatch({ type: "WIN_LEVEL" });
-        setCodeError(false);
-      }else{
-        setCodeError(true)
-      }
-    }
+   function submitCode() {
+  if (currentLevel.checkWin(codeInput)) {
+    dispatch({ type: "WIN_LEVEL" });
+    setCodeError(false);
+  } else {
+    setCodeError(true);
+  }
+}
+
+function handleCodeSubmit(e) {
+  if (e.key !== "Enter") return;
+  submitCode();
+}
 
     // Fonction pour passer au niveau suivant 
     function handleNextLevel(){
@@ -145,12 +149,13 @@ export default function Terminal() {
                 {currentLevel.useCodeInput && (
                 <div className='unlock-code-container'>
                  <label>Solution : </label>
-              <input
-                type="text"
-                value={codeInput}
-                onChange={(e) => setCodeInput(e.target.value)}
-                onKeyDown={handleCodeSubmit}
-              />
+                  <input
+                    type="text"
+                    value={codeInput}
+                    onChange={(e) => setCodeInput(e.target.value)}
+                    onKeyDown={handleCodeSubmit}
+                  />
+                  <button className='next-btn' onClick={submitCode}>Valider</button>
               </div>
               )}
 
