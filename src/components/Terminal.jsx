@@ -231,13 +231,21 @@ function handleCodeSubmit(e) {
                       fontSize: "14px",
                       flex: 1,
                     }} />
+                     
                 </div>
                 
             <div ref={bottomRef}></div>
           </div>
         </div>
       </div>
+      <div style={{backgroundColor:"#1A1A24"}}>
+        <a href="/mention-legale.html" style={{color:"white"} }>
+            Mentions légales
+      </a>              
+      </div>
+      
 
+       
     </>
     )}
   </> 
