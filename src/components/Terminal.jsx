@@ -239,12 +239,12 @@ function handleCodeSubmit(e) {
         </div>
       </div>
       <div style={{backgroundColor:"#1A1A24"}}>
-        <a href="/mention-legale.html" style={{color:"white"} }>
+        <a href="/mention-legale.html" target="_blank" style={{color:"white"} }>
             Mentions légales
       </a>              
       </div>
       
-
+                    
        
     </>
     )}
